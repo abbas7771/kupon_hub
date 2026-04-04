@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KuponHub - Deals & Coupons</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7C3AED;
+      --secondary: #4F46E5;
+      --light-bg: #f9f7ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; }
+
+    /* Header */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      box-shadow: 0 2px 10px rgba(124, 58, 237, 0.15);
+      padding: 1rem 0;
+    }
+    .navbar-brand { font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .navbar-brand i { margin-right: 0.5rem; }
+    .nav-link { color: rgba(255,255,255,0.8) !important; transition: 0.2s; }
+    .nav-link:hover { color: #fff !important; }
+    .btn-join { background: #fff; color: var(--primary); font-weight: 700; padding: 0.5rem 1.5rem; border-radius: 999px; }
+    .btn-join:hover { background: rgba(255,255,255,0.9); }
+
+    /* Search Bar */
+    .search-section { background: linear-gradient(160deg, var(--primary) 0%, var(--secondary) 100%); padding: 3rem 0; color: #fff; }
+    .search-input { border: none; padding: 12px 20px; border-radius: 999px; font-size: 0.95rem; }
+    .search-input::placeholder { color: #ccc; }
+
+    /* Category Pills */
+    .category-pills { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; margin-top: 1.5rem; }
+    .category-pill {
+      background: var(--light-bg);
+      border: 2px solid #e0e0e0;
+      border-radius: 999px;
+      padding: 0.6rem 1.5rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: 600;
+      transition: 0.2s;
+      color: #333;
+    }
+    .category-pill:hover { border-color: var(--primary); color: var(--primary); }
+    .category-pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* Coupon Card */
+    .coupon-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e9e6f9;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .coupon-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(124, 58, 237, 0.15); }
+
+    .card-image {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, var(--light-bg) 0%, #f0f0f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .card-body { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; }
+    .card-badge {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      width: fit-content;
+    }
+    .card-title { font-size: 1.1rem; font-weight: 800; color: #111; margin-bottom: 0.3rem; }
+    .card-subtitle { font-size: 0.8rem; color: #999; margin-bottom: 0.8rem; }
+    .card-description { font-size: 0.9rem; color: #555; line-height: 1.5; margin-bottom: 1rem; }
+    .card-cashback { color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; }
+
+    /* Code & Buttons */
+    .code-section {
+      background: var(--light-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .code-label { font-size: 0.75rem; color: #999; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .code-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #fff;
+      border: 1px dashed var(--primary);
+      padding: 0.8rem;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-btn:hover { color: var(--secondary); }
+
+    .btn-deal {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      width: 100%;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .btn-deal:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    /* Section */
+    .section-title { font-size: 2rem; font-weight: 800; color: #111; margin-bottom: 2rem; margin-top: 3rem; }
+
+    /* Filter Controls */
+    .filter-bar {
+      background: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .sort-select {
+      border: 1px solid #ddd;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    /* Footer */
+    footer { background: #f5f5f5; padding: 2rem 0; color: #666; text-align: center; margin-top: 4rem; }
+
+    @media (max-width: 768px) {
+      .search-section { padding: 2rem 0; }
+      .section-title { font-size: 1.5rem; }
+      .category-pills { gap: 0.5rem; }
+      .category-pill { padding: 0.5rem 1rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><i class="fas fa-ticket-alt"></i>KuponHub</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#coupons">Kuponlar</a></li>
+        <li class="nav-item"><a class="nav-link" href="#referrals">Referral</a></li>
+        <li class="nav-item"><a class="btn btn-join ms-2" href="#">Qeydiyyat</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- SEARCH SECTION -->
+<section class="search-section">
+  <div class="container">
+    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Deals və Kuponları tap</h1>
+    <div class="input-group">
+      <input type="text" id="searchInput" class="search-input" placeholder="Brend, kateqoriya və ya kod axtar...">
+      <button class="btn" style="background: rgba(255,255,255,0.2); border-color: #fff; color: #fff;">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="category-pills">
+      <button class="category-pill active" onclick="filterCategory('all')">Hamısı</button>
+      <button class="category-pill" onclick="filterCategory('food')">🍔 Yemə</button>
+      <button class="category-pill" onclick="filterCategory('shopping')">🛍️ Alış-veriş</button>
+      <button class="category-pill" onclick="filterCategory('travel')">✈️ Səyahət</button>
+      <button class="category-pill" onclick="filterCategory('tech')">💻 Texnika</button>
+      <button class="category-pill" onclick="filterCategory('fashion')">👗 Moda</button>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="container mt-4">
+  <div class="filter-bar">
+    <span style="font-weight: 600; color: #666;">Sırala:</span>
+    <select class="sort-select" id="sortSelect" onchange="sortCoupons()">
+      <option value="newest">Ən yeni</option>
+      <option value="highest">Ən yüksək endirim</option>
+      <option value="expiring">Bitməkdə olanlar</option>
+    </select>
+  </div>
+</div>
+
+<!-- COUPONS GRID -->
+<section id="coupons" class="container">
+  <h2 class="section-title">Günün ən yaxşı dealları</h2>
+  <div id="couponGrid" class="row g-4"></div>
+</section>
+
+<!-- REFERRALS SECTION -->
+<section id="referrals" class="container mt-5">
+  <h2 class="section-title">Dost dəvət et, qazanc al</h2>
+  <div id="referralGrid" class="row g-4"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 KuponHub. Bütün kuponlar yoxlanılmışdır.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const COUPONS = [
+  { id: 1, name: 'Wolt', emoji: '🍔', category: 'food', discount: '30%', code: 'WOLT30', desc: 'Birinci 3 sifariş üçün 30% endirim', expires: '2026-06-30', cashback: '€5 geri qayıt', link: 'https://wolt.com' },
+  { id: 2, name: 'Trendyol', emoji: '👗', category: 'shopping', discount: '20%', code: 'TREND20', desc: 'Sitewidə 20% endirim - moda, elektronika', expires: '2026-05-15', cashback: '₺50 geri qayıt', link: 'https://trendyol.com' },
+  { id: 3, name: 'Booking.com', emoji: '🏨', category: 'travel', discount: '10%', code: 'BOOK10', desc: 'Otel bağlaması üçün 10% endirim', expires: '2026-07-31', cashback: '$15 geri qayıt', link: 'https://booking.com' },
+  { id: 4, name: 'Spotify', emoji: '🎵', category: 'tech', discount: '3ay', code: 'SPOT3', desc: 'Spotify Premium - 3 ay pulsuz', expires: '2026-06-01', cashback: 'Pulsuz', link: 'https://spotify.com' },
+  { id: 5, name: 'Amazon', emoji: '📦', category: 'shopping', discount: '15%', code: 'AMZN15', desc: 'Elektronika və ev əşyaları üçün 15% endirim', expires: '2026-04-30', cashback: '$10 geri qayıt', link: 'https://amazon.com' },
+  { id: 6, name: 'Airbnb', emoji: '🏡', category: 'travel', discount: '$15', code: 'AIRBNB15', desc: 'Birinci Airbnb sifariş üçün $15 endirim', expires: '2026-08-31', cashback: '$20 pul', link: 'https://airbnb.com' },
+  { id: 7, name: 'Nike', emoji: '👟', category: 'fashion', discount: '30%', code: 'NIKE30', desc: 'Idman ayakkabıları üçün 30% endirim', expires: '2026-05-31', cashback: '₺100 geri', link: 'https://nike.com' },
+  { id: 8, name: 'Uber', emoji: '🚗', category: 'travel', discount: '20%', code: 'UBER20', desc: 'Sonrakı 5 yolculuq üçün 20% endirim', expires: '2026-04-20', cashback: '$10', link: 'https://uber.com' },
+  { id: 9, name: 'Netflix', emoji: '🎬', category: 'tech', discount: '40%', code: 'NETFLIX', desc: 'Standart planı 3 ay 40% endirimli', expires: '2026-05-01', cashback: 'Pulsuz ay', link: 'https://netflix.com' },
+  { id: 10, name: 'H&M', emoji: '👔', category: 'fashion', discount: '25%', code: 'HM25', desc: 'H&M-də bütün alışlar üçün 25% endirim', expires: '2026-05-20', cashback: '₺75 geri', link: 'https://hm.com' },
+  { id: 11, name: 'AliExpress', emoji: '🛒', category: 'shopping', discount: '$12', code: 'ALI12', desc: '$60+ sifarişlər üçün $12 endirim', expires: '2026-06-15', cashback: '$5', link: 'https://aliexpress.com' },
+  { id: 12, name: 'Zara', emoji: '✨', category: 'fashion', discount: '20%', code: 'ZARA20', desc: 'Yeni gəlişlər - yalnız onlayn 20% endirim', expires: '2026-04-25', cashback: '₺60 geri', link: 'https://zara.com' },
+];
+
+const REFERRALS = [
+  { name: 'Wolt', emoji: '🍔', reward: '€10', friendReward: '€5', code: 'WOLTR-ABBAS' },
+  { name: 'Uber', emoji: '🚗', reward: '$10', friendReward: '$5', code: 'UBERREF2026' },
+  { name: 'Airbnb', emoji: '🏡', reward: '$30', friendReward: '$20', code: 'AIRBNBREF' },
+  { name: 'Spotify', emoji: '🎵', reward: '1 ay', friendReward: '3 ay', code: 'SPOTREF' },
+  { name: 'Amazon Prime', emoji: '📦', reward: '$5', friendReward: 'Pulsuz', code: 'AMZNREF' },
+  { name: 'Booking', emoji: '🏨', reward: '€20', friendReward: '€15', code: 'BOOKREF' },
+];
+
+let currentCategory = 'all';
+let currentSort = 'newest';
+
+function renderCoupons() {
+  const grid = document.getElementById('couponGrid');
+  let filtered = COUPONS.filter(c => currentCategory === 'all' || c.category === currentCategory);
+  
+  if (currentSort === 'highest') filtered.sort((a, b) => parseInt(b.discount) - parseInt(a.discount));
+  if (currentSort === 'expiring') filtered.sort((a, b) => new Date(a.expires) - new Date(b.expires));
+
+  grid.innerHTML = filtered.map(c => `
+    <div class="col-md-6 col-lg-4">
+      <div class="coupon-card">
+        <div class="card-image">${c.emoji}</div>
+        <div class="card-body">
+          <span class="card-badge">${c.discount}</span>
+          <h5 class="card-title">${c.name}</h5>
+          <p class="card-description">${c.desc}</p>
+          <p class="card-cashback">💰 ${c.cashback}</p>
+          <div class="code-section">
+            <div class="code-label">Kod</div>
+            <div class="code-box">
+              <span>${c.code}</span>
+              <button class="copy-btn" onclick="copyCode('${c.code}')"><i class="fas fa-copy"></i></button>
+            </div>
+          </div>
+          <button class="btn-deal" onclick="window.open('${c.link}')">Deal Al →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderReferrals() {
+  const grid = document.getElementById('referralGrid');
+  grid.innerHTML = REFERRALS.map(r => `
+    <div class="col-md-6 col-lg-4">
+      <div class="coupon-card">
+        <div class="card-image">${r.emoji}</div>
+        <div class="card-body">
+          <h5 class="card-title">${r.name}</h5>
+          <div style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.3rem;">SƏN QA­ZANIRSAN</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">${r.reward}</div>
+          </div>
+          <div style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.3rem;">DOSTUN QA­ZANIR</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">${r.friendReward}</div>
+          </div>
+          <div class="code-section">
+            <div class="code-label">Kod</div>
+            <div class="code-box">
+              <span>${r.code}</span>
+              <button class="copy-btn" onclick="copyCode('${r.code}')"><i class="fas fa-copy"></i></button>
+            </div>
+          </div>
+          <button class="btn-deal">Dəvəti Al →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function copyCode(code) {
+  navigator.clipboard.writeText(code);
+  alert(`"${code}" kopyalandı!`);
+}
+
+function filterCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  renderCoupons();
+}
+
+function sortCoupons() {
+  currentSort = document.getElementById('sortSelect').value;
+  renderCoupons();
+}
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  const grid = document.getElementById('couponGrid');
+  let filtered = COUPONS.filter(c => 
+    c.name.toLowerCase().includes(query) ||
+    c.desc.toLowerCase().includes(query) ||
+    c.code.toLowerCase().includes(query)
+  );
+  grid.innerHTML = filtered.map(c => `
+    <div class="col-md-6 col-lg-4">
+      <div class="coupon-card">
+        <div class="card-image">${c.emoji}</div>
+        <div class="card-body">
+          <span class="card-badge">${c.discount}</span>
+          <h5 class="card-title">${c.name}</h5>
+          <p class="card-description">${c.desc}</p>
+          <p class="card-cashback">💰 ${c.cashback}</p>
+          <div class="code-section">
+            <div class="code-label">Kod</div>
+            <div class="code-box">
+              <span>${c.code}</span>
+              <button class="copy-btn" onclick="copyCode('${c.code}')"><i class="fas fa-copy"></i></button>
+            </div>
+          </div>
+          <button class="btn-deal" onclick="window.open('${c.link}')">Deal Al →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+});
+
+renderCoupons();
+renderReferrals();
+</script>
+
+</body>
+</html>
