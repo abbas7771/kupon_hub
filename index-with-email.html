@@ -28,9 +28,6 @@
     .nav-menu a { color: #333; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: 0.2s; }
     .nav-menu a:hover { color: var(--primary); }
     .nav-right { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
-    .btn-signin { color: #333; font-weight: 600; text-decoration: none; padding: 0.6rem 1.2rem; }
-    .btn-join { background: var(--primary); color: #fff; font-weight: 700; padding: 0.6rem 1.5rem; border-radius: 999px; text-decoration: none; transition: 0.2s; }
-    .btn-join:hover { background: var(--secondary); color: #fff; }
     
     .lang-selector {
       background: #f5f5f5;
@@ -72,8 +69,8 @@
     }
     .search-box button:hover { background: var(--secondary); }
 
-    .categories { padding: 1.5rem 0; border-bottom: 1px solid #f0f0f0; }
-    .cat-list { display: flex; gap: 1.5rem; overflow-x: auto; }
+    .categories { padding: 1.5rem 0; border-bottom: 1px solid #f0f0f0; overflow-x: auto; }
+    .cat-list { display: flex; gap: 1.5rem; }
     .cat-item {
       display: flex;
       flex-direction: column;
@@ -274,7 +271,6 @@
           <option value="zh">🇨🇳 ZH</option>
           <option value="es">🇪🇸 ES</option>
         </select>
-        <a href="#" class="btn-signin" data-en="Sign In" data-az="Daxil ol" data-tr="Giriş Yap" data-ru="Войти" data-zh="登入" data-es="Iniciar sesión">Sign In</a>
       </div>
     </div>
   </div>
@@ -321,7 +317,7 @@
 <div id="emailModal" class="email-modal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2 class="modal-title" data-en="Unlock Coupon" data-az="Kuponu Aç" data-tr="Kuponu Aç" data-ru="Раскрыть купон" data-zh="解锁优惠券" data-es="Desbloquear cupón">Unlock Coupon</h2>
+    <h2 class="modal-title" id="modalTitle" data-en="Unlock Coupon" data-az="Kuponu Aç" data-tr="Kuponu Aç" data-ru="Раскрыть купон" data-zh="解锁优惠券" data-es="Desbloquear cupón">Unlock Coupon</h2>
     <p class="modal-subtitle" data-en="Subscribe with your email to get the coupon code" data-az="Kuponu almaq üçün email-lə subscribe ol" data-tr="Kuponu almak için e-postanızla abone olun" data-ru="Подпишитесь на свой адрес электронной почты, чтобы получить код купона" data-zh="使用您的电子邮件订阅以获取优惠券代码" data-es="Suscríbete con tu correo para obtener el código del cupón">Subscribe with your email to get the coupon code</p>
     
     <form class="email-form" onsubmit="handleEmailSubmit(event)">
@@ -345,22 +341,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const COUPONS = [
-  { id: 1, name: 'Trendyol', emoji: '👗', category: 'shopping', discount: '20%', code: 'TREND20', desc: { en: '20% discount sitewide', az: 'Sitewidə 20% endirim', tr: 'Site genelinde %20 indirim', ru: 'Скидка 20% на весь сайт', zh: '网站全部20%折扣', es: '20% descuento en todo el sitio' }, cashback: '10% Cashback', expires: '2026-05-15', link: 'https://trendyol.com' },
-  { id: 2, name: 'Booking.com', emoji: '🏨', category: 'travel', discount: '10%', code: 'BOOK10', desc: { en: '10% off hotels worldwide', az: 'Dünya hotelləri üçün 10% endirim', tr: 'Dünya çapında otellerde %10 indirim', ru: 'Скидка 10% на отели по всему миру', zh: '全球酒店优惠10%', es: '10% descuento en hoteles mundiales' }, cashback: '5% Cashback', expires: '2026-07-31', link: 'https://booking.com' },
-  { id: 3, name: 'Spotify', emoji: '🎵', category: 'tech', discount: '3 months', code: 'SPOT3', desc: { en: 'Spotify Premium - 3 months free', az: 'Spotify Premium - 3 ay pulsuz', tr: 'Spotify Premium - 3 ay ücretsiz', ru: 'Spotify Premium - 3 месяца бесплатно', zh: 'Spotify Premium - 3个月免费', es: 'Spotify Premium - 3 meses gratis' }, cashback: 'Free', expires: '2026-06-01', link: 'https://spotify.com' },
-  { id: 4, name: 'Amazon', emoji: '📦', category: 'shopping', discount: '15%', code: 'AMZN15', desc: { en: '15% off electronics & home', az: 'Elektronika və ev əşyaları üçün 15%', tr: 'Elektronik ve ev eşyaları %15', ru: 'Скидка 15% на электронику', zh: '电子产品15%折扣', es: '15% descuento en electrónica' }, cashback: '8% Cashback', expires: '2026-04-30', link: 'https://amazon.com' },
-  { id: 5, name: 'Airbnb', emoji: '🏡', category: 'travel', discount: '$15', code: 'AIRBNB15', desc: { en: '$15 off your first stay', az: 'Birinci qalışınız üçün $15', tr: 'İlk konaklamada $15 indirim', ru: 'Скидка $15 на первое проживание', zh: '首次入住优惠$15', es: '$15 descuento en primera estancia' }, cashback: 'Travel Reward', expires: '2026-08-31', link: 'https://airbnb.com' },
-  { id: 6, name: 'Nike', emoji: '👟', category: 'fashion', discount: '30%', code: 'NIKE30', desc: { en: '30% off running shoes & sportswear', az: 'Ayakkabı və idman üçün 30%', tr: 'Spor ayakkabı ve giysilerde %30', ru: 'Скидка 30% на кроссовки', zh: '跑鞋30%折扣', es: '30% descuento en zapatillas deportivas' }, cashback: '12% Cashback', expires: '2026-05-31', link: 'https://nike.com' },
-  { id: 7, name: 'Uber', emoji: '🚗', category: 'travel', discount: '20%', code: 'UBER20', desc: { en: '20% off your next 5 rides', az: 'Sonrakı 5 yolculuq üçün 20%', tr: 'Sonraki 5 yolculukta %20', ru: 'Скидка 20% на следующие 5 поездок', zh: '下5次乘坐优惠20%', es: '20% descuento en próximos 5 viajes' }, cashback: 'Ride Reward', expires: '2026-04-20', link: 'https://uber.com' },
-  { id: 8, name: 'Netflix', emoji: '🎬', category: 'tech', discount: '40%', code: 'NETFLIX', desc: { en: '40% off 3 months Standard plan', az: 'Standart planın 3 ayı 40%', tr: 'Standart plan 3 ay %40', ru: 'Скидка 40% на 3 месяца', zh: 'Standard计划3个月40%折扣', es: '40% descuento en 3 meses Standard' }, cashback: 'Free Month', expires: '2026-05-01', link: 'https://netflix.com' },
-  { id: 9, name: 'ExpressVPN', emoji: '🔒', category: 'vpn', discount: '12 months', code: 'VPN12', desc: { en: 'Get 12 months + 3 months free', az: '12 ay + 3 ay pulsuz', tr: '12 ay + 3 ay ücretsiz', ru: '12 месяцев + 3 месяца бесплатно', zh: '12个月+ 3个月免费', es: '12 meses + 3 meses gratis' }, cashback: 'Save 49%', expires: '2026-06-15', link: 'https://expressvpn.com' },
-  { id: 10, name: 'NordVPN', emoji: '🔐', category: 'vpn', discount: '2 years', code: 'NORD2Y', desc: { en: '2 years + 3 months free', az: '2 il + 3 ay pulsuz', tr: '2 yıl + 3 ay ücretsiz', ru: '2 года + 3 месяца бесплатно', zh: '2年+ 3个月免费', es: '2 años + 3 meses gratis' }, cashback: 'Best Deal', expires: '2026-07-10', link: 'https://nordvpn.com' },
-  { id: 11, name: 'Surfshark VPN', emoji: '🌊', category: 'vpn', discount: '3 years', code: 'SHARK3Y', desc: { en: '3 years at 55% off', az: '3 il 55% endirimli', tr: '3 yıl %55 indirim', ru: '3 года со скидкой 55%', zh: '3年55%折扣', es: '3 años con 55% descuento' }, cashback: 'Lowest Price', expires: '2026-08-20', link: 'https://surfshark.com' },
-  { id: 12, name: 'Zara', emoji: '✨', category: 'fashion', discount: '20%', code: 'ZARA20', desc: { en: '20% off new arrivals online', az: 'Yeni gəlişlər üçün 20%', tr: 'Yeni ürünlerde %20 indirim', ru: 'Скидка 20% на новые поступления', zh: '新品上市20%折扣', es: '20% descuento en novedades' }, cashback: '10% Cashback', expires: '2026-04-25', link: 'https://zara.com' },
-  { id: 13, name: 'H&M', emoji: '👔', category: 'fashion', discount: '25%', code: 'HM25', desc: { en: '25% off entire purchase', az: 'Bütün alışlar üçün 25%', tr: 'Tüm alışlarda %25 indirim', ru: 'Скидка 25% на всю покупку', zh: '整个购买25%折扣', es: '25% descuento en compra completa' }, cashback: '12% Cashback', expires: '2026-05-20', link: 'https://hm.com' },
-  { id: 14, name: 'AliExpress', emoji: '🛒', category: 'shopping', discount: '$12', code: 'ALI12', desc: { en: '$12 off orders over $60', az: '$60+ sifariş üçün $12 endirim', tr: '$60 üstü siparişlerde $12 indirim', ru: 'Скидка $12 на заказы свыше $60', zh: '订单超过60美元优惠12美元', es: '$12 descuento en pedidos mayores a $60' }, cashback: '5% Cashback', expires: '2026-06-15', link: 'https://aliexpress.com' },
-  { id: 15, name: 'Adidas', emoji: '🏃', category: 'fashion', discount: '35%', code: 'ADIDAS35', desc: { en: '35% off sitewide', az: 'Sitewidə 35% endirim', tr: 'Site genelinde %35 indirim', ru: 'Скидка 35% на весь сайт', zh: '网站全部35%折扣', es: '35% descuento en todo el sitio' }, cashback: '15% Cashback', expires: '2026-04-15', link: 'https://adidas.com' },
-  { id: 16, name: 'Apple', emoji: '🍎', category: 'tech', discount: '8%', code: 'APPLE8', desc: { en: '8% off select Mac and iPad', az: 'Mac və iPad üçün 8%', tr: 'Seçili Mac ve iPad %8', ru: 'Скидка 8% на выбранные Mac и iPad', zh: '选定的Mac和iPad8%折扣', es: '8% descuento en Mac e iPad seleccionados' }, cashback: '5% Cashback', expires: '2026-06-30', link: 'https://apple.com' },
+  { id: 1, name: 'VidIQ', emoji: '🎥', category: 'tech', discount: 'Special', code: 'VIDIQ', desc: { en: 'YouTube analytics and optimization tools', az: 'YouTube analitika və optimallaşdırma alətləri', tr: 'YouTube analitik ve optimizasyon araçları', ru: 'Инструменты аналитики и оптимизации YouTube', zh: 'YouTube分析和优化工具', es: 'Herramientas de análisis y optimización de YouTube' }, cashback: 'Partnership', expires: '2026-12-31', link: 'https://vidiq.com/kuponhub', isPartner: true }
 ];
 
 let currentLang = 'en';
@@ -369,7 +350,6 @@ let currentCoupon = null;
 
 const SHEET_ID = '1-KV7akC-NKTXgzD5zaDgEa3zI_3Wxw5KvGVZly-pk6w';
 const SHEET_NAME = 'Sheet1';
-const APPEND_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`;
 
 function changeLanguage(lang) {
   currentLang = lang;
@@ -397,11 +377,13 @@ function renderCoupons() {
         <div class="card-cashback">${c.cashback}</div>
         <h3 class="card-title">${c.name}</h3>
         <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
-        <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
-          <code>••••••••</code>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
-        </div>
-        <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+        ${c.isPartner ? `<a class="btn-deal" href="${c.link}" target="_blank" style="margin-top: auto;">${currentLang === 'en' ? 'Visit Website' : 'Saytı Ziyarət Et'}</a>` : `
+          <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
+            <code>••••••••</code>
+            <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+          </div>
+          <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+        `}
       </div>
     </div>
   `).join('');
@@ -437,7 +419,6 @@ function handleEmailSubmit(e) {
     body: formData,
     mode: 'no-cors'
   }).catch(() => {
-    // Fallback: Direct append via Apps Script (optional)
     console.log('Email captured:', email);
   });
   
@@ -469,11 +450,13 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
         <div class="card-cashback">${c.cashback}</div>
         <h3 class="card-title">${c.name}</h3>
         <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
-        <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
-          <code>••••••••</code>
-          <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
-        </div>
-        <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+        ${c.isPartner ? `<a class="btn-deal" href="${c.link}" target="_blank" style="margin-top: auto;">${currentLang === 'en' ? 'Visit Website' : 'Saytı Ziyarət Et'}</a>` : `
+          <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
+            <code>••••••••</code>
+            <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+          </div>
+          <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+        `}
       </div>
     </div>
   `).join('') : '<p style="grid-column: 1/-1; text-align: center; color: #999;">No coupons found</p>';
