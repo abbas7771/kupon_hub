@@ -17,7 +17,6 @@
     html, body { width: 100%; height: 100%; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; }
 
-    /* ─── NAVBAR ─── */
     .navbar {
       background: #fff;
       border-bottom: 1px solid #e0e0e0;
@@ -29,14 +28,7 @@
     .nav-menu a { color: #333; font-weight: 500; font-size: 0.95rem; text-decoration: none; transition: 0.2s; }
     .nav-menu a:hover { color: var(--primary); }
     .nav-right { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
-    .btn-signin { color: #333; font-weight: 600; text-decoration: none; padding: 0.6rem 1.2rem; }
-    .btn-join { background: var(--primary); color: #fff; font-weight: 700; padding: 0.6rem 1.5rem; border-radius: 999px; text-decoration: none; transition: 0.2s; }
-    .btn-join:hover { background: var(--secondary); color: #fff; }
     
-    .lang-dropdown {
-      position: relative;
-      display: inline-block;
-    }
     .lang-selector {
       background: #f5f5f5;
       border: 1px solid #e0e0e0;
@@ -50,9 +42,7 @@
     }
     .lang-selector:hover { background: #e0e0e0; }
 
-    /* ─── HERO SEARCH ─── */
     .hero { background: #fff; padding: 2rem 0; border-bottom: 1px solid #f0f0f0; }
-    .hero-content { max-width: 100%; }
     .hero h1 { font-size: 2.2rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
     .hero p { color: #666; font-size: 0.95rem; margin-bottom: 1.5rem; }
     .search-box {
@@ -79,9 +69,8 @@
     }
     .search-box button:hover { background: var(--secondary); }
 
-    /* ─── CATEGORIES ─── */
-    .categories { padding: 1.5rem 0; border-bottom: 1px solid #f0f0f0; }
-    .cat-list { display: flex; gap: 1.5rem; overflow-x: auto; }
+    .categories { padding: 1.5rem 0; border-bottom: 1px solid #f0f0f0; overflow-x: auto; }
+    .cat-list { display: flex; gap: 1.5rem; }
     .cat-item {
       display: flex;
       flex-direction: column;
@@ -99,10 +88,9 @@
     .cat-item.active { color: var(--primary); font-weight: 700; border-bottom: 3px solid var(--primary); padding-bottom: calc(0.5rem - 3px); }
     .cat-icon { font-size: 1.8rem; }
 
-    /* ─── COUPON GRID (4 PER ROW) ─── */
     .deals-section { padding: 2rem 0; }
     .deals-title { font-size: 1.8rem; font-weight: 900; color: #111; margin-bottom: 1.5rem; }
-    .coupon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .coupon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
     
     .coupon-card {
       background: #fff;
@@ -113,10 +101,20 @@
       cursor: pointer;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .coupon-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+    }
+
+    .coupon-card.partner-card {
+      aspect-ratio: 1;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      justify-content: flex-end;
+      align-items: flex-start;
     }
 
     .card-image-container {
@@ -126,17 +124,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 3rem;
       position: relative;
       overflow: hidden;
     }
-    .card-image-container img { width: 100%; height: 100%; object-fit: cover; }
-    .card-image-container.emoji { font-size: 3rem; }
 
     .card-content { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
     .card-cashback { color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 0.4rem; }
     .card-title { font-size: 0.95rem; font-weight: 800; color: #111; margin-bottom: 0.3rem; }
-    .card-subtitle { font-size: 0.75rem; color: #999; margin-bottom: 0.8rem; }
     .card-description { font-size: 0.85rem; color: #555; line-height: 1.4; margin-bottom: 1rem; }
 
     .code-badge {
@@ -148,17 +143,10 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-    }
-    .code-badge code { font-family: 'Courier New', monospace; font-weight: 700; color: var(--primary); flex: 1; }
-    .copy-btn {
-      background: none;
-      border: none;
-      color: var(--primary);
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: 0.2s;
     }
-    .copy-btn:hover { color: var(--secondary); }
+    .code-badge:hover { background: #e8e0ff; }
+    .code-badge code { font-family: 'Courier New', monospace; font-weight: 700; color: var(--primary); flex: 1; }
 
     .btn-deal {
       background: var(--primary);
@@ -176,12 +164,119 @@
     }
     .btn-deal:hover { background: var(--secondary); }
 
-    /* ─── FOOTER ─── */
+    .discount-badge {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: #FF6B6B;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      z-index: 10;
+    }
+
+    .partner-content {
+      width: 100%;
+      height: 100%;
+      background-image: url('public/images/vidiq-card.png');
+      background-size: cover;
+      background-position: center;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      color: white;
+    }
+
+    .partner-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: white;
+      margin: 0;
+    }
+
+    /* EMAIL MODAL */
+    .email-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .email-modal.active { display: flex; }
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+    .modal-title { font-size: 1.5rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
+    .modal-subtitle { color: #666; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .email-form { display: flex; flex-direction: column; gap: 1rem; }
+    .email-input {
+      padding: 0.9rem 1.2rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .email-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+    .submit-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .submit-btn:hover { background: var(--secondary); }
+    .coupon-reveal {
+      background: var(--light-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: none;
+    }
+    .coupon-reveal.show { display: block; }
+    .coupon-reveal code {
+      display: block;
+      background: #fff;
+      padding: 1rem;
+      border: 2px dashed var(--primary);
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+
     footer { background: #f5f5f5; padding: 2rem 0; color: #666; text-align: center; font-size: 0.85rem; margin-top: 3rem; }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
-      .coupon-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+      .coupon-grid { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 768px) {
       .coupon-grid { grid-template-columns: repeat(2, 1fr); }
@@ -192,6 +287,7 @@
     @media (max-width: 480px) {
       .coupon-grid { grid-template-columns: 1fr; }
       .nav-menu { display: none; }
+      .modal-content { width: 95%; padding: 1.5rem; }
     }
   </style>
 </head>
@@ -211,18 +307,14 @@
       </div>
 
       <div class="nav-right">
-        <div class="lang-dropdown">
-          <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
-            <option value="en">🇺🇸 EN</option>
-            <option value="az">🇦🇿 AZ</option>
-            <option value="tr">🇹🇷 TR</option>
-            <option value="ru">🇷🇺 RU</option>
-            <option value="zh">🇨🇳 ZH</option>
-            <option value="es">🇪🇸 ES</option>
-          </select>
-        </div>
-        <a href="#" class="btn-signin" data-en="Sign In" data-az="Daxil ol" data-tr="Giriş Yap" data-ru="Войти" data-zh="登入" data-es="Iniciar sesión">Sign In</a>
-        <a href="https://vidiq.com/kuponhub" target="_blank" class="btn-join" data-en="Join Now" data-az="İndi Qeydiyyat" data-tr="Şimdi Katıl" data-ru="Присоединиться" data-zh="现在加入" data-es="Unirse Ahora">Join Now</a>
+        <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
+          <option value="en">🇺🇸 EN</option>
+          <option value="az">🇦🇿 AZ</option>
+          <option value="tr">🇹🇷 TR</option>
+          <option value="ru">🇷🇺 RU</option>
+          <option value="zh">🇨🇳 ZH</option>
+          <option value="es">🇪🇸 ES</option>
+        </select>
       </div>
     </div>
   </div>
@@ -265,6 +357,26 @@
   </div>
 </section>
 
+<!-- EMAIL MODAL -->
+<div id="emailModal" class="email-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2 class="modal-title" id="modalTitle" data-en="Unlock Coupon" data-az="Kuponu Aç" data-tr="Kuponu Aç" data-ru="Раскрыть купон" data-zh="解锁优惠券" data-es="Desbloquear cupón">Unlock Coupon</h2>
+    <p class="modal-subtitle" id="modalSubtitle" data-en="Subscribe with your email to get the coupon code" data-az="Kuponu almaq üçün email-lə subscribe ol" data-tr="Kuponu almak için e-postanızla abone olun" data-ru="Подпишитесь на свой адрес электронной почты, чтобы получить код купона" data-zh="使用您的电子邮件订阅以获取优惠券代码" data-es="Suscríbete con tu correo para obtener el código del cupón">Subscribe with your email to get the coupon code</p>
+    
+    <form class="email-form" id="emailForm" onsubmit="handleEmailSubmit(event)" style="display: none;">
+      <input type="email" class="email-input" id="emailInput" placeholder="Enter your email..." data-en="Enter your email..." data-az="Email daxil et..." data-tr="E-postanızı girin..." data-ru="Введите ваш адрес электронной почты..." data-zh="输入您的电子邮件..." data-es="Ingresa tu email..." required>
+      <button type="submit" class="submit-btn" data-en="Get Coupon" data-az="Kuponu Al" data-tr="Kuponu Al" data-ru="Получить купон" data-zh="获取优惠券" data-es="Obtener cupón">Get Coupon</button>
+    </form>
+
+    <div id="couponReveal" class="coupon-reveal">
+      <p style="color: #666; font-size: 0.85rem; margin-bottom: 0.5rem;" data-en="Your coupon code:" data-az="Sizin kupon kodu:" data-tr="Kupon kodunuz:" data-ru="Ваш код купона:" data-zh="您的优惠券代码:" data-es="Su código de cupón:">Your coupon code:</p>
+      <code id="couponCode"></code>
+      <button onclick="copyCoupon()" class="btn-deal" style="margin-top: 0.5rem; padding: 0.6rem;" data-en="Copy Code" data-az="Kodu Kopyala" data-tr="Kodu Kopyala" data-ru="Копировать код" data-zh="复制代码" data-es="Copiar código">Copy Code</button>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p data-en="© 2026 KuponHub. All coupons verified." data-az="© 2026 KuponHub. Bütün kuponlar yoxlanılmışdır." data-tr="© 2026 KuponHub. Tüm kuponlar doğrulanmıştır." data-ru="© 2026 KuponHub. Все купоны проверены." data-zh="© 2026 KuponHub. 所有优惠券已验证。" data-es="© 2026 KuponHub. Todos los cupones verificados.">© 2026 KuponHub. All coupons verified.</p>
@@ -273,39 +385,45 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const COUPONS = [
-  { id: 1, name: 'Trendyol', emoji: '👗', category: 'shopping', discount: '20%', code: 'TREND20', desc: { en: '20% discount sitewide', az: 'Sitewidə 20% endirim', tr: 'Site genelinde %20 indirim', ru: 'Скидка 20% на весь сайт', zh: '网站全部20%折扣', es: '20% descuento en todo el sitio' }, cashback: '10% Cashback', expires: '2026-05-15', link: 'https://trendyol.com' },
-  { id: 2, name: 'Booking.com', emoji: '🏨', category: 'travel', discount: '10%', code: 'BOOK10', desc: { en: '10% off hotels worldwide', az: 'Dünya hotelləri üçün 10% endirim', tr: 'Dünya çapında otellerde %10 indirim', ru: 'Скидка 10% на отели по всему миру', zh: '全球酒店优惠10%', es: '10% descuento en hoteles mundiales' }, cashback: '5% Cashback', expires: '2026-07-31', link: 'https://booking.com' },
-  { id: 3, name: 'Spotify', emoji: '🎵', category: 'tech', discount: '3 months', code: 'SPOT3', desc: { en: 'Spotify Premium - 3 months free', az: 'Spotify Premium - 3 ay pulsuz', tr: 'Spotify Premium - 3 ay ücretsiz', ru: 'Spotify Premium - 3 месяца бесплатно', zh: 'Spotify Premium - 3个月免费', es: 'Spotify Premium - 3 meses gratis' }, cashback: 'Free', expires: '2026-06-01', link: 'https://spotify.com' },
-  { id: 4, name: 'Amazon', emoji: '📦', category: 'shopping', discount: '15%', code: 'AMZN15', desc: { en: '15% off electronics & home', az: 'Elektronika və ev əşyaları üçün 15%', tr: 'Elektronik ve ev eşyaları %15', ru: 'Скидка 15% на электронику', zh: '电子产品15%折扣', es: '15% descuento en electrónica' }, cashback: '8% Cashback', expires: '2026-04-30', link: 'https://amazon.com' },
-  { id: 5, name: 'Airbnb', emoji: '🏡', category: 'travel', discount: '$15', code: 'AIRBNB15', desc: { en: '$15 off your first stay', az: 'Birinci qalışınız üçün $15', tr: 'İlk konaklamada $15 indirim', ru: 'Скидка $15 на первое проживание', zh: '首次入住优惠$15', es: '$15 descuento en primera estancia' }, cashback: 'Travel Reward', expires: '2026-08-31', link: 'https://airbnb.com' },
-  { id: 6, name: 'Nike', emoji: '👟', category: 'fashion', discount: '30%', code: 'NIKE30', desc: { en: '30% off running shoes & sportswear', az: 'Ayakkabı və idman üçün 30%', tr: 'Spor ayakkabı ve giysilerde %30', ru: 'Скидка 30% на кроссовки', zh: '跑鞋30%折扣', es: '30% descuento en zapatillas deportivas' }, cashback: '12% Cashback', expires: '2026-05-31', link: 'https://nike.com' },
-  { id: 7, name: 'Uber', emoji: '🚗', category: 'travel', discount: '20%', code: 'UBER20', desc: { en: '20% off your next 5 rides', az: 'Sonrakı 5 yolculuq üçün 20%', tr: 'Sonraki 5 yolculukta %20', ru: 'Скидка 20% на следующие 5 поездок', zh: '下5次乘坐优惠20%', es: '20% descuento en próximos 5 viajes' }, cashback: 'Ride Reward', expires: '2026-04-20', link: 'https://uber.com' },
-  { id: 8, name: 'Netflix', emoji: '🎬', category: 'tech', discount: '40%', code: 'NETFLIX', desc: { en: '40% off 3 months Standard plan', az: 'Standart planın 3 ayı 40%', tr: 'Standart plan 3 ay %40', ru: 'Скидка 40% на 3 месяца', zh: 'Standard计划3个月40%折扣', es: '40% descuento en 3 meses Standard' }, cashback: 'Free Month', expires: '2026-05-01', link: 'https://netflix.com' },
-  { id: 9, name: 'ExpressVPN', emoji: '🔒', category: 'vpn', discount: '12 months', code: 'VPN12', desc: { en: 'Get 12 months + 3 months free', az: '12 ay + 3 ay pulsuz', tr: '12 ay + 3 ay ücretsiz', ru: '12 месяцев + 3 месяца бесплатно', zh: '12个月+ 3个月免费', es: '12 meses + 3 meses gratis' }, cashback: 'Save 49%', expires: '2026-06-15', link: 'https://expressvpn.com' },
-  { id: 10, name: 'NordVPN', emoji: '🔐', category: 'vpn', discount: '2 years', code: 'NORD2Y', desc: { en: '2 years + 3 months free', az: '2 il + 3 ay pulsuz', tr: '2 yıl + 3 ay ücretsiz', ru: '2 года + 3 месяца бесплатно', zh: '2年+ 3个月免费', es: '2 años + 3 meses gratis' }, cashback: 'Best Deal', expires: '2026-07-10', link: 'https://nordvpn.com' },
-  { id: 11, name: 'Surfshark VPN', emoji: '🌊', category: 'vpn', discount: '3 years', code: 'SHARK3Y', desc: { en: '3 years at 55% off', az: '3 il 55% endirimli', tr: '3 yıl %55 indirim', ru: '3 года со скидкой 55%', zh: '3年55%折扣', es: '3 años con 55% descuento' }, cashback: 'Lowest Price', expires: '2026-08-20', link: 'https://surfshark.com' },
-  { id: 12, name: 'Zara', emoji: '✨', category: 'fashion', discount: '20%', code: 'ZARA20', desc: { en: '20% off new arrivals online', az: 'Yeni gəlişlər üçün 20%', tr: 'Yeni ürünlerde %20 indirim', ru: 'Скидка 20% на новые поступления', zh: '新品上市20%折扣', es: '20% descuento en novedades' }, cashback: '10% Cashback', expires: '2026-04-25', link: 'https://zara.com' },
-  { id: 13, name: 'H&M', emoji: '👔', category: 'fashion', discount: '25%', code: 'HM25', desc: { en: '25% off entire purchase', az: 'Bütün alışlar üçün 25%', tr: 'Tüm alışlarda %25 indirim', ru: 'Скидка 25% на всю покупку', zh: '整个购买25%折扣', es: '25% descuento en compra completa' }, cashback: '12% Cashback', expires: '2026-05-20', link: 'https://hm.com' },
-  { id: 14, name: 'AliExpress', emoji: '🛒', category: 'shopping', discount: '$12', code: 'ALI12', desc: { en: '$12 off orders over $60', az: '$60+ sifariş üçün $12 endirim', tr: '$60 üstü siparişlerde $12 indirim', ru: 'Скидка $12 на заказы свыше $60', zh: '订单超过60美元优惠12美元', es: '$12 descuento en pedidos mayores a $60' }, cashback: '5% Cashback', expires: '2026-06-15', link: 'https://aliexpress.com' },
-  { id: 15, name: 'Adidas', emoji: '🏃', category: 'fashion', discount: '35%', code: 'ADIDAS35', desc: { en: '35% off sitewide', az: 'Sitewidə 35% endirim', tr: 'Site genelinde %35 indirim', ru: 'Скидка 35% на весь сайт', zh: '网站全部35%折扣', es: '35% descuento en todo el sitio' }, cashback: '15% Cashback', expires: '2026-04-15', link: 'https://adidas.com' },
-  { id: 16, name: 'Apple', emoji: '🍎', category: 'tech', discount: '8%', code: 'APPLE8', desc: { en: '8% off select Mac and iPad', az: 'Mac və iPad üçün 8%', tr: 'Seçili Mac ve iPad %8', ru: 'Скидка 8% на выбранные Mac и iPad', zh: '选定的Mac和iPad8%折扣', es: '8% descuento en Mac e iPad seleccionados' }, cashback: '5% Cashback', expires: '2026-06-30', link: 'https://apple.com' },
+  {
+    id: 1,
+    name: 'VidIQ',
+    emoji: '🎥',
+    category: 'tech',
+    discount: '50%',
+    code: 'VIDIQ50',
+    desc: {
+      en: 'YouTube analytics and optimization tools',
+      az: 'YouTube analitika və optimallaşdırma alətləri',
+      tr: 'YouTube analitik ve optimizasyon araçları',
+      ru: 'Инструменты аналитики и оптимизации YouTube',
+      zh: 'YouTube分析和优化工具',
+      es: 'Herramientas de análisis y optimización de YouTube'
+    },
+    cashback: 'Partnership',
+    expires: '2026-12-31',
+    link: 'https://vidiq.com/kuponhub',
+    isPartner: true
+  }
 ];
 
 let currentLang = 'en';
 let currentCategory = 'all';
+let currentCoupon = null;
+let currentModalType = 'coupon';
 
 function changeLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('language', lang);
-  
+
   document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+    el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
   });
-  
+
   document.querySelectorAll('input[data-en]').forEach(el => {
-    el.placeholder = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+    el.placeholder = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
   });
-  
+
   renderCoupons();
 }
 
@@ -313,27 +431,93 @@ function renderCoupons() {
   const grid = document.getElementById('couponGrid');
   let filtered = COUPONS.filter(c => currentCategory === 'all' || c.category === currentCategory);
 
-  grid.innerHTML = filtered.map(c => `
-    <div class="coupon-card">
-      <div class="card-image-container emoji">${c.emoji}</div>
-      <div class="card-content">
-        <div class="card-cashback">${c.cashback}</div>
-        <h3 class="card-title">${c.name}</h3>
-        <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
-        <div class="code-badge">
-          <code>${c.code}</code>
-          <button class="copy-btn" onclick="copyCode('${c.code}')"><i class="fas fa-copy"></i></button>
+  grid.innerHTML = filtered.map(c => {
+    if (c.isPartner) {
+      return `
+        <div class="coupon-card partner-card" onclick="openPartnerModal('${c.link}', '${c.code}', '${c.discount}')">
+          <div class="discount-badge">${c.discount}</div>
+          <div class="partner-content">
+            <div class="partner-title">${c.name}</div>
+          </div>
         </div>
-        <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : currentLang === 'az' ? 'Axtar' : currentLang === 'tr' ? 'Ara' : currentLang === 'ru' ? 'Покупать' : currentLang === 'zh' ? '购买' : 'Comprar'}</a>
-      </div>
-    </div>
-  `).join('');
+      `;
+    } else {
+      return `
+        <div class="coupon-card">
+          <div class="card-image-container">${c.emoji}</div>
+          <div class="card-content">
+            <div class="card-cashback">${c.cashback}</div>
+            <h3 class="card-title">${c.name}</h3>
+            <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
+            <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
+              <code>••••••••</code>
+              <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+            </div>
+            <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+          </div>
+        </div>
+      `;
+    }
+  }).join('');
 }
 
-function copyCode(code) {
-  navigator.clipboard.writeText(code);
-  const msg = currentLang === 'en' ? 'Copied!' : currentLang === 'az' ? 'Kopyalandı!' : currentLang === 'tr' ? 'Kopyalandı!' : currentLang === 'ru' ? 'Скопировано!' : currentLang === 'zh' ? '已复制' : '¡Copiado!';
-  alert(`"${code}" ${msg}`);
+function openModal(code, name) {
+  currentModalType = 'coupon';
+  currentCoupon = code;
+  document.getElementById('emailForm').style.display = 'flex';
+  document.getElementById('couponReveal').classList.remove('show');
+  document.getElementById('emailInput').value = '';
+  document.getElementById('emailModal').classList.add('active');
+}
+
+function openPartnerModal(link, code, discount) {
+  currentModalType = 'partner';
+  currentCoupon = code;
+  document.getElementById('emailForm').style.display = 'flex';
+  document.getElementById('couponReveal').classList.remove('show');
+  document.getElementById('emailInput').value = '';
+  document.getElementById('emailModal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('emailModal').classList.remove('active');
+}
+
+function handleEmailSubmit(e) {
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value;
+
+  if (!email) return;
+
+  const formData = new FormData();
+  formData.append('Timestamp', new Date().toLocaleString());
+  formData.append('Email', email);
+  formData.append('Coupon', currentCoupon);
+  formData.append('Language', currentLang);
+
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWxUHsSaurWmbjlUEmLpWyFijcSUJPKjTKPzFjVV61p9c2pA/formResponse', {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+  }).catch(() => {
+    console.log('Email captured:', email);
+  });
+
+  if (currentModalType === 'partner') {
+    setTimeout(() => {
+      window.open('https://vidiq.com/kuponhub', '_blank');
+      closeModal();
+    }, 500);
+  } else {
+    document.getElementById('emailForm').style.display = 'none';
+    document.getElementById('couponCode').textContent = currentCoupon;
+    document.getElementById('couponReveal').classList.add('show');
+  }
+}
+
+function copyCoupon() {
+  navigator.clipboard.writeText(currentCoupon);
+  alert(currentLang === 'en' ? 'Copied!' : 'Kopyalandı!');
 }
 
 function filterCategory(cat) {
@@ -347,21 +531,40 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   const query = e.target.value.toLowerCase();
   const grid = document.getElementById('couponGrid');
   let filtered = COUPONS.filter(c => c.name.toLowerCase().includes(query) || c.code.toLowerCase().includes(query));
-  grid.innerHTML = filtered.length ? filtered.map(c => `
-    <div class="coupon-card">
-      <div class="card-image-container emoji">${c.emoji}</div>
-      <div class="card-content">
-        <div class="card-cashback">${c.cashback}</div>
-        <h3 class="card-title">${c.name}</h3>
-        <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
-        <div class="code-badge">
-          <code>${c.code}</code>
-          <button class="copy-btn" onclick="copyCode('${c.code}')"><i class="fas fa-copy"></i></button>
+  grid.innerHTML = filtered.length ? filtered.map(c => {
+    if (c.isPartner) {
+      return `
+        <div class="coupon-card partner-card" onclick="openPartnerModal('${c.link}', '${c.code}', '${c.discount}')">
+          <div class="discount-badge">${c.discount}</div>
+          <div class="partner-content">
+            <div class="partner-title">${c.name}</div>
+          </div>
         </div>
-        <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
-      </div>
-    </div>
-  `).join('') : '<p style="grid-column: 1/-1; text-align: center; color: #999;">No coupons found</p>';
+      `;
+    } else {
+      return `
+        <div class="coupon-card">
+          <div class="card-image-container">${c.emoji}</div>
+          <div class="card-content">
+            <div class="card-cashback">${c.cashback}</div>
+            <h3 class="card-title">${c.name}</h3>
+            <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
+            <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
+              <code>••••••••</code>
+              <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+            </div>
+            <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+          </div>
+        </div>
+      `;
+    }
+  }).join('') : '<p style="grid-column: 1/-1; text-align: center; color: #999;">No coupons found</p>';
+});
+
+document.getElementById('emailModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('emailModal')) {
+    closeModal();
+  }
 });
 
 const savedLang = localStorage.getItem('language') || 'en';
