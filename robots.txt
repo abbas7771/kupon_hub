@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abbas7771.github.io/kupon_hub/sitemap.xml
