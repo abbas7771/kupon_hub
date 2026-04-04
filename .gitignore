@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/__tests__/
+/coverage/
+.nyc_output/
+
+# Next.js
+/.next/
+/out/
+
+# Build output
+/build/
+/dist/
+*.swp
+*.swo
+*~
+
+# Production
+.env.production.local
+.env.local
+
+# IDE and editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+.env.*.local
+
+# OS files
+Thumbs.db
+*.log
+
+# Package lock files (optional)
+package-lock.json
+yarn.lock
+
+# Cache
+.eslintcache
+
+# Temp files
+*.tmp
+.cache/
+
+# Git
+.git/
