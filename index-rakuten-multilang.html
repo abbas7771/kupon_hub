@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KuponHub - Deals & Coupons</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7C3AED;
+      --secondary: #4F46E5;
+      --light-bg: #f9f7ff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fff; }
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      box-shadow: 0 2px 10px rgba(124, 58, 237, 0.15);
+      padding: 1rem 0;
+    }
+    .navbar-brand { font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .nav-link { color: rgba(255,255,255,0.8) !important; transition: 0.2s; }
+    .nav-link:hover { color: #fff !important; }
+    .lang-selector {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-left: auto;
+    }
+    .lang-selector:hover { background: rgba(255,255,255,0.3); }
+
+    .search-section { background: linear-gradient(160deg, var(--primary) 0%, var(--secondary) 100%); padding: 3rem 0; color: #fff; }
+    .search-input { border: none; padding: 12px 20px; border-radius: 999px; font-size: 0.95rem; }
+
+    .category-pills { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: 1rem; margin-top: 1.5rem; }
+    .category-pill {
+      background: var(--light-bg);
+      border: 2px solid #e0e0e0;
+      border-radius: 999px;
+      padding: 0.6rem 1.5rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font-weight: 600;
+      transition: 0.2s;
+      color: #333;
+    }
+    .category-pill:hover { border-color: var(--primary); color: var(--primary); }
+    .category-pill.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    .coupon-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e9e6f9;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .coupon-card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(124, 58, 237, 0.15); }
+
+    .card-image {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, var(--light-bg) 0%, #f0f0f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .card-body { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; }
+    .card-badge {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      width: fit-content;
+    }
+    .card-title { font-size: 1.1rem; font-weight: 800; color: #111; margin-bottom: 0.3rem; }
+    .card-description { font-size: 0.9rem; color: #555; line-height: 1.5; margin-bottom: 1rem; }
+
+    .code-section {
+      background: var(--light-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .code-label { font-size: 0.75rem; color: #999; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .code-box {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #fff;
+      border: 1px dashed var(--primary);
+      padding: 0.8rem;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-deal {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      width: 100%;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .btn-deal:hover { opacity: 0.9; }
+
+    .section-title { font-size: 2rem; font-weight: 800; color: #111; margin-bottom: 2rem; margin-top: 3rem; }
+
+    .filter-bar {
+      background: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer { background: #f5f5f5; padding: 2rem 0; color: #666; text-align: center; margin-top: 4rem; }
+
+    @media (max-width: 768px) {
+      .section-title { font-size: 1.5rem; }
+      .category-pills { gap: 0.5rem; }
+      .category-pill { padding: 0.5rem 1rem; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container d-flex align-items-center">
+    <a class="navbar-brand" href="#"><i class="fas fa-ticket-alt"></i>KuponHub</a>
+    <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
+      <option value="en">🇺🇸 English</option>
+      <option value="az">🇦🇿 Azərbaycanca</option>
+      <option value="tr">🇹🇷 Türkçe</option>
+      <option value="ru">🇷🇺 Русский</option>
+      <option value="zh">🇨🇳 中文</option>
+      <option value="es">🇪🇸 Español</option>
+    </select>
+  </div>
+</nav>
+
+<!-- SEARCH SECTION -->
+<section class="search-section">
+  <div class="container">
+    <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;" data-en="Find Deals & Coupons" data-az="Deals və Kuponları tap" data-tr="Fırsat ve Kupon Bul" data-ru="Найти предложения" data-zh="找到优惠券" data-es="Encuentra Cupones">Find Deals & Coupons</h1>
+    <div class="input-group">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search brand or code..." data-en="Search brand or code..." data-az="Brend, kateqoriya və ya kod axtar..." data-tr="Marka veya kodu ara..." data-ru="Поиск бренда или кода..." data-zh="搜索品牌或代码..." data-es="Busca marca o código...">
+    </div>
+
+    <!-- Category Pills -->
+    <div class="category-pills">
+      <button class="category-pill active" onclick="filterCategory('all')"><span data-en="All" data-az="Hamısı" data-tr="Tümü" data-ru="Все" data-zh="全部" data-es="Todos">All</span></button>
+      <button class="category-pill" onclick="filterCategory('shopping')">🛍️ <span data-en="Shopping" data-az="Alış-veriş" data-tr="Alışveriş" data-ru="Покупки" data-zh="购物" data-es="Compras">Shopping</span></button>
+      <button class="category-pill" onclick="filterCategory('travel')">✈️ <span data-en="Travel" data-az="Səyahət" data-tr="Seyahat" data-ru="Путешествия" data-zh="旅行" data-es="Viajes">Travel</span></button>
+      <button class="category-pill" onclick="filterCategory('tech')">💻 <span data-en="Tech" data-az="Texnika" data-tr="Teknoloji" data-ru="Технология" data-zh="技术" data-es="Tecnología">Tech</span></button>
+      <button class="category-pill" onclick="filterCategory('vpn')">🔒 <span data-en="VPN" data-az="VPN" data-tr="VPN" data-ru="VPN" data-zh="VPN" data-es="VPN">VPN</span></button>
+      <button class="category-pill" onclick="filterCategory('fashion')">👗 <span data-en="Fashion" data-az="Moda" data-tr="Moda" data-ru="Мода" data-zh="时尚" data-es="Moda">Fashion</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- COUPONS GRID -->
+<section id="coupons" class="container">
+  <h2 class="section-title" data-en="Best Deals Today" data-az="Günün ən yaxşı dealları" data-tr="Günün En İyi Fırsatları" data-ru="Лучшие предложения дня" data-zh="今天最好的优惠" data-es="Mejores Ofertas del Día">Best Deals Today</h2>
+  <div id="couponGrid" class="row g-4"></div>
+</section>
+
+<!-- REFERRALS SECTION -->
+<section id="referrals" class="container mt-5">
+  <h2 class="section-title" data-en="Invite Friends & Earn" data-az="Dost dəvət et, qazanc al" data-tr="Arkadaş Davet Et, Kazan" data-ru="Пригласи друга, заработай" data-zh="邀请朋友赚钱" data-es="Invita amigos y gana">Invite Friends & Earn</h2>
+  <div id="referralGrid" class="row g-4"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p data-en="© 2026 KuponHub. All coupons verified." data-az="© 2026 KuponHub. Bütün kuponlar yoxlanılmışdır." data-tr="© 2026 KuponHub. Tüm kuponlar doğrulanmıştır." data-ru="© 2026 KuponHub. Все купоны проверены." data-zh="© 2026 KuponHub. 所有优惠券已验证。" data-es="© 2026 KuponHub. Todos los cupones verificados.">© 2026 KuponHub. All coupons verified.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const TRANSLATIONS = {
+  en: {
+    code: 'Code',
+    expiry: 'Expires',
+    dealBtn: 'Get Deal →',
+    sort: 'Sort:',
+    newest: 'Newest',
+    highest: 'Highest Discount',
+    expiring: 'Expiring Soon',
+  },
+  az: {
+    code: 'Kod',
+    expiry: 'Bitmə tarixi',
+    dealBtn: 'Deal Al →',
+    sort: 'Sırala:',
+    newest: 'Ən yeni',
+    highest: 'Ən yüksək endirim',
+    expiring: 'Bitməkdə olanlar',
+  },
+  tr: {
+    code: 'Kod',
+    expiry: 'Bitiş Tarihi',
+    dealBtn: 'Fırsatı Al →',
+    sort: 'Sırala:',
+    newest: 'En Yeni',
+    highest: 'En Yüksek İndirim',
+    expiring: 'Yakında Bitmek Üzere',
+  },
+  ru: {
+    code: 'Код',
+    expiry: 'Истекает',
+    dealBtn: 'Получить предложение →',
+    sort: 'Сортировка:',
+    newest: 'Новейшие',
+    highest: 'Самый высокий скидка',
+    expiring: 'Скоро истекает',
+  },
+  zh: {
+    code: '代码',
+    expiry: '到期',
+    dealBtn: '获取优惠 →',
+    sort: '排序:',
+    newest: '最新',
+    highest: '最高折扣',
+    expiring: '即将过期',
+  },
+  es: {
+    code: 'Código',
+    expiry: 'Vencimiento',
+    dealBtn: 'Obtener Cupón →',
+    sort: 'Ordenar:',
+    newest: 'Más Nuevo',
+    highest: 'Mayor Descuento',
+    expiring: 'Por Vencer Pronto',
+  },
+};
+
+const COUPONS = [
+  { id: 1, name: 'Trendyol', emoji: '👗', category: 'shopping', discount: '20%', code: 'TREND20', desc: { en: '20% discount sitewide', az: 'Sitewidə 20% endirim', tr: 'Site genelinde %20 indirim', ru: 'Скидка 20% на весь сайт', zh: '网站全部20%折扣', es: '20% descuento en todo el sitio' }, expires: '2026-05-15', link: 'https://trendyol.com' },
+  { id: 2, name: 'Booking.com', emoji: '🏨', category: 'travel', discount: '10%', code: 'BOOK10', desc: { en: '10% off hotels worldwide', az: 'Dünya hotelləri üçün 10% endirim', tr: 'Dünya çapında otellerde %10 indirim', ru: 'Скидка 10% на отели по всему миру', zh: '全球酒店优惠10%', es: '10% descuento en hoteles mundiales' }, expires: '2026-07-31', link: 'https://booking.com' },
+  { id: 3, name: 'Spotify', emoji: '🎵', category: 'tech', discount: '3 months', code: 'SPOT3', desc: { en: 'Spotify Premium - 3 months free', az: 'Spotify Premium - 3 ay pulsuz', tr: 'Spotify Premium - 3 ay ücretsiz', ru: 'Spotify Premium - 3 месяца бесплатно', zh: 'Spotify Premium - 3个月免费', es: 'Spotify Premium - 3 meses gratis' }, expires: '2026-06-01', link: 'https://spotify.com' },
+  { id: 4, name: 'Amazon', emoji: '📦', category: 'shopping', discount: '15%', code: 'AMZN15', desc: { en: '15% off electronics & home goods', az: 'Elektronika və ev əşyaları üçün 15% endirim', tr: 'Elektronik ve ev eşyaları için %15 indirim', ru: 'Скидка 15% на электронику и товары для дома', zh: '电子产品和家居用品15%折扣', es: '15% descuento en electrónica y artículos del hogar' }, expires: '2026-04-30', link: 'https://amazon.com' },
+  { id: 5, name: 'Airbnb', emoji: '🏡', category: 'travel', discount: '$15', code: 'AIRBNB15', desc: { en: '$15 off your first stay', az: 'Birinci qalışınız üçün $15 endirim', tr: 'İlk konaklamanızda $15 indirim', ru: 'Скидка $15 на первое проживание', zh: '首次入住优惠$15', es: '$15 descuento en tu primera estancia' }, expires: '2026-08-31', link: 'https://airbnb.com' },
+  { id: 6, name: 'Nike', emoji: '👟', category: 'fashion', discount: '30%', code: 'NIKE30', desc: { en: '30% off running shoes & sportswear', az: 'Ayakkabı və idman paltarına 30% endirim', tr: 'Ayakkabı ve spor kıyafetlerde %30 indirim', ru: 'Скидка 30% на кроссовки и спортивную одежду', zh: '跑鞋和运动服30%折扣', es: '30% descuento en zapatillas y ropa deportiva' }, expires: '2026-05-31', link: 'https://nike.com' },
+  { id: 7, name: 'Uber', emoji: '🚗', category: 'travel', discount: '20%', code: 'UBER20', desc: { en: '20% off your next 5 rides', az: 'Sonrakı 5 yolculuq üçün 20% endirim', tr: 'Sonraki 5 yolculukta %20 indirim', ru: 'Скидка 20% на следующие 5 поездок', zh: '下5次乘坐优惠20%', es: '20% descuento en tus próximos 5 viajes' }, expires: '2026-04-20', link: 'https://uber.com' },
+  { id: 8, name: 'Netflix', emoji: '🎬', category: 'tech', discount: '40%', code: 'NETFLIX', desc: { en: '40% off 3 months of Standard plan', az: 'Standart planın 3 ayı üçün 40% endirim', tr: 'Standart plan için 3 ay %40 indirim', ru: 'Скидка 40% на 3 месяца плана Standard', zh: 'Standard计划3个月40%折扣', es: '40% descuento en 3 meses del plan Standard' }, expires: '2026-05-01', link: 'https://netflix.com' },
+  { id: 9, name: 'ExpressVPN', emoji: '🔒', category: 'vpn', discount: '12 months', code: 'VPN12', desc: { en: 'Get 12 months + 3 months free', az: '12 ay + 3 ay pulsuz', tr: '12 ay + 3 ay ücretsiz', ru: '12 месяцев + 3 месяца бесплатно', zh: '12个月+ 3个月免费', es: '12 meses + 3 meses gratis' }, expires: '2026-06-15', link: 'https://expressvpn.com' },
+  { id: 10, name: 'NordVPN', emoji: '🔐', category: 'vpn', discount: '2 years', code: 'NORD2Y', desc: { en: '2 years + 3 months free + 30-day money back', az: '2 il + 3 ay pulsuz + 30 gün pul geri', tr: '2 yıl + 3 ay ücretsiz + 30 gün para iadesi', ru: '2 года + 3 месяца бесплатно + возврат за 30 дней', zh: '2年+ 3个月免费+ 30天退款', es: '2 años + 3 meses gratis + devolución de 30 días' }, expires: '2026-07-10', link: 'https://nordvpn.com' },
+  { id: 11, name: 'Surfshark VPN', emoji: '🌊', category: 'vpn', discount: '3 years', code: 'SHARK3Y', desc: { en: '3 years at 55% off - lowest price ever', az: '3 il 55% endirimli - ən aşağı qiymət', tr: '3 yıl %55 indirim - en düşük fiyat', ru: '3 года со скидкой 55% - самая низкая цена', zh: '3年55%折扣-有史以来最低价格', es: '3 años con 55% descuento - precio más bajo' }, expires: '2026-08-20', link: 'https://surfshark.com' },
+  { id: 12, name: 'Zara', emoji: '✨', category: 'fashion', discount: '20%', code: 'ZARA20', desc: { en: '20% off new arrivals - online only', az: 'Yeni gəlişlər üçün 20% endirim - yalnız onlayn', tr: 'Yeni ürünlerde %20 indirim - sadece çevrimiçi', ru: 'Скидка 20% на новые поступления - только онлайн', zh: '新品上市20%折扣-仅在线', es: '20% descuento en novedades - solo en línea' }, expires: '2026-04-25', link: 'https://zara.com' },
+];
+
+const REFERRALS = [
+  { name: 'Uber', emoji: '🚗', reward: '$10', friendReward: '$5', code: 'UBERREF2026' },
+  { name: 'Airbnb', emoji: '🏡', reward: '$30', friendReward: '$20', code: 'AIRBNBREF' },
+  { name: 'Spotify', emoji: '🎵', reward: '1 month', friendReward: '3 months', code: 'SPOTREF' },
+  { name: 'Amazon Prime', emoji: '📦', reward: '$5', friendReward: 'Free trial', code: 'AMZNREF' },
+  { name: 'Booking', emoji: '🏨', reward: '€20', friendReward: '€15', code: 'BOOKREF' },
+  { name: 'ExpressVPN', emoji: '🔒', reward: '3 months free', friendReward: '1 month free', code: 'VPNREF' },
+];
+
+let currentLang = 'en';
+let currentCategory = 'all';
+
+function t(key) {
+  return TRANSLATIONS[currentLang]?.[key] || TRANSLATIONS['en'][key];
+}
+
+function changeLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('language', lang);
+  document.documentElement.lang = lang;
+  
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+  });
+  
+  renderCoupons();
+  renderReferrals();
+}
+
+function renderCoupons() {
+  const grid = document.getElementById('couponGrid');
+  let filtered = COUPONS.filter(c => currentCategory === 'all' || c.category === currentCategory);
+
+  grid.innerHTML = filtered.map(c => `
+    <div class="col-md-6 col-lg-4">
+      <div class="coupon-card">
+        <div class="card-image">${c.emoji}</div>
+        <div class="card-body">
+          <span class="card-badge">${c.discount}</span>
+          <h5 class="card-title">${c.name}</h5>
+          <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
+          <div class="code-section">
+            <div class="code-label">${t('code')}</div>
+            <div class="code-box">
+              <span>${c.code}</span>
+              <button class="copy-btn" onclick="copyCode('${c.code}')"><i class="fas fa-copy"></i></button>
+            </div>
+          </div>
+          <button class="btn-deal" onclick="window.open('${c.link}')">${t('dealBtn')}</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderReferrals() {
+  const grid = document.getElementById('referralGrid');
+  grid.innerHTML = REFERRALS.map(r => `
+    <div class="col-md-6 col-lg-4">
+      <div class="coupon-card">
+        <div class="card-image">${r.emoji}</div>
+        <div class="card-body">
+          <h5 class="card-title">${r.name}</h5>
+          <div style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.3rem;">${currentLang === 'en' ? 'YOU EARN' : currentLang === 'az' ? 'SƏN QA­ZANIRSAN' : currentLang === 'tr' ? 'SEN KAZAN' : currentLang === 'ru' ? 'ВЫ ЗАРАБАТЫВАЕТЕ' : currentLang === 'zh' ? '你赚' : 'TÚ GANAS'}</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">${r.reward}</div>
+          </div>
+          <div style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+            <div style="font-size: 0.75rem; color: #999; margin-bottom: 0.3rem;">${currentLang === 'en' ? 'YOUR FRIEND EARNS' : currentLang === 'az' ? 'DOSTUN QA­ZANIR' : currentLang === 'tr' ? 'ARKADASIN KAZAN' : currentLang === 'ru' ? 'ДРУГ ЗАРАБАТЫВАЕТ' : currentLang === 'zh' ? '你的朋友赚' : 'TU AMIGO GANA'}</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">${r.friendReward}</div>
+          </div>
+          <div class="code-section">
+            <div class="code-label">${t('code')}</div>
+            <div class="code-box">
+              <span>${r.code}</span>
+              <button class="copy-btn" onclick="copyCode('${r.code}')"><i class="fas fa-copy"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function copyCode(code) {
+  navigator.clipboard.writeText(code);
+  alert(`"${code}" copied!`);
+}
+
+function filterCategory(cat) {
+  currentCategory = cat;
+  document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+  event.target.closest('.category-pill').classList.add('active');
+  renderCoupons();
+}
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  const grid = document.getElementById('couponGrid');
+  let filtered = COUPONS.filter(c => 
+    c.name.toLowerCase().includes(query) ||
+    c.code.toLowerCase().includes(query)
+  );
+  grid.innerHTML = filtered.map(c => `
+    <div class="col-md-6 col-lg-4">
+      <div class="coupon-card">
+        <div class="card-image">${c.emoji}</div>
+        <div class="card-body">
+          <span class="card-badge">${c.discount}</span>
+          <h5 class="card-title">${c.name}</h5>
+          <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
+          <div class="code-section">
+            <div class="code-label">${t('code')}</div>
+            <div class="code-box">
+              <span>${c.code}</span>
+              <button class="copy-btn" onclick="copyCode('${c.code}')"><i class="fas fa-copy"></i></button>
+            </div>
+          </div>
+          <button class="btn-deal" onclick="window.open('${c.link}')">${t('dealBtn')}</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+});
+
+const savedLang = localStorage.getItem('language') || 'en';
+document.getElementById('langSelect').value = savedLang;
+changeLanguage(savedLang);
