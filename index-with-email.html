@@ -107,6 +107,25 @@
       box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
     }
 
+    .coupon-card.partner-card {
+      aspect-ratio: 1;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      justify-content: flex-end;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .coupon-card.partner-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+    }
+
+    .partner-emoji { font-size: 3rem; margin-bottom: 1rem; }
+    .partner-title { font-size: 1.3rem; font-weight: 900; color: white; margin-bottom: 0.5rem; }
+    .partner-desc { font-size: 0.8rem; color: rgba(255,255,255,0.9); line-height: 1.3; }
+
     .card-image-container {
       width: 100%;
       height: 180px;
@@ -317,7 +336,7 @@
 <div id="emailModal" class="email-modal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2 class="modal-title" id="modalTitle" data-en="Unlock Coupon" data-az="Kuponu Aç" data-tr="Kuponu Aç" data-ru="Раскрыть купон" data-zh="解锁优惠券" data-es="Desbloquear cupón">Unlock Coupon</h2>
+    <h2 class="modal-title" data-en="Unlock Coupon" data-az="Kuponu Aç" data-tr="Kuponu Aç" data-ru="Раскрыть купон" data-zh="解锁优惠券" data-es="Desbloquear cupón">Unlock Coupon</h2>
     <p class="modal-subtitle" data-en="Subscribe with your email to get the coupon code" data-az="Kuponu almaq üçün email-lə subscribe ol" data-tr="Kuponu almak için e-postanızla abone olun" data-ru="Подпишитесь на свой адрес электронной почты, чтобы получить код купона" data-zh="使用您的电子邮件订阅以获取优惠券代码" data-es="Suscríbete con tu correo para obtener el código del cupón">Subscribe with your email to get the coupon code</p>
     
     <form class="email-form" onsubmit="handleEmailSubmit(event)">
@@ -348,19 +367,16 @@ let currentLang = 'en';
 let currentCategory = 'all';
 let currentCoupon = null;
 
-const SHEET_ID = '1-KV7akC-NKTXgzD5zaDgEa3zI_3Wxw5KvGVZly-pk6w';
-const SHEET_NAME = 'Sheet1';
-
 function changeLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('language', lang);
   
   document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+    el.textContent = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
   });
   
   document.querySelectorAll('input[data-en]').forEach(el => {
-    el.placeholder = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
+    el.placeholder = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
   });
   
   renderCoupons();
@@ -370,23 +386,35 @@ function renderCoupons() {
   const grid = document.getElementById('couponGrid');
   let filtered = COUPONS.filter(c => currentCategory === 'all' || c.category === currentCategory);
 
-  grid.innerHTML = filtered.map(c => `
-    <div class="coupon-card">
-      <div class="card-image-container">${c.emoji}</div>
-      <div class="card-content">
-        <div class="card-cashback">${c.cashback}</div>
-        <h3 class="card-title">${c.name}</h3>
-        <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
-        ${c.isPartner ? `<a class="btn-deal" href="${c.link}" target="_blank" style="margin-top: auto;">${currentLang === 'en' ? 'Visit Website' : 'Saytı Ziyarət Et'}</a>` : `
-          <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
-            <code>••••••••</code>
-            <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+  grid.innerHTML = filtered.map(c => {
+    if (c.isPartner) {
+      return `
+        <div class="coupon-card partner-card" onclick="window.open('${c.link}', '_blank')">
+          <div style="width: 100%;">
+            <div class="partner-emoji">${c.emoji}</div>
+            <div class="partner-title">${c.name}</div>
+            <div class="partner-desc">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</div>
           </div>
-          <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
-        `}
-      </div>
-    </div>
-  `).join('');
+        </div>
+      `;
+    } else {
+      return `
+        <div class="coupon-card">
+          <div class="card-image-container">${c.emoji}</div>
+          <div class="card-content">
+            <div class="card-cashback">${c.cashback}</div>
+            <h3 class="card-title">${c.name}</h3>
+            <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
+            <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
+              <code>••••••••</code>
+              <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+            </div>
+            <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+          </div>
+        </div>
+      `;
+    }
+  }).join('');
 }
 
 function openModal(code, name) {
@@ -406,14 +434,12 @@ function handleEmailSubmit(e) {
   
   if (!email) return;
   
-  // Save to Google Sheets using Form Submission
   const formData = new FormData();
   formData.append('Timestamp', new Date().toLocaleString());
   formData.append('Email', email);
   formData.append('Coupon', currentCoupon);
   formData.append('Language', currentLang);
   
-  // Google Sheets Form Submission (silent)
   fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWxUHsSaurWmbjlUEmLpWyFijcSUJPKjTKPzFjVV61p9c2pA/formResponse', {
     method: 'POST',
     body: formData,
@@ -422,7 +448,6 @@ function handleEmailSubmit(e) {
     console.log('Email captured:', email);
   });
   
-  // Show coupon
   document.getElementById('couponCode').textContent = currentCoupon;
   document.getElementById('couponReveal').classList.add('show');
 }
@@ -443,26 +468,37 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   const query = e.target.value.toLowerCase();
   const grid = document.getElementById('couponGrid');
   let filtered = COUPONS.filter(c => c.name.toLowerCase().includes(query) || c.code.toLowerCase().includes(query));
-  grid.innerHTML = filtered.length ? filtered.map(c => `
-    <div class="coupon-card">
-      <div class="card-image-container">${c.emoji}</div>
-      <div class="card-content">
-        <div class="card-cashback">${c.cashback}</div>
-        <h3 class="card-title">${c.name}</h3>
-        <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
-        ${c.isPartner ? `<a class="btn-deal" href="${c.link}" target="_blank" style="margin-top: auto;">${currentLang === 'en' ? 'Visit Website' : 'Saytı Ziyarət Et'}</a>` : `
-          <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
-            <code>••••••••</code>
-            <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+  grid.innerHTML = filtered.length ? filtered.map(c => {
+    if (c.isPartner) {
+      return `
+        <div class="coupon-card partner-card" onclick="window.open('${c.link}', '_blank')">
+          <div style="width: 100%;">
+            <div class="partner-emoji">${c.emoji}</div>
+            <div class="partner-title">${c.name}</div>
+            <div class="partner-desc">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</div>
           </div>
-          <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
-        `}
-      </div>
-    </div>
-  `).join('') : '<p style="grid-column: 1/-1; text-align: center; color: #999;">No coupons found</p>';
+        </div>
+      `;
+    } else {
+      return `
+        <div class="coupon-card">
+          <div class="card-image-container">${c.emoji}</div>
+          <div class="card-content">
+            <div class="card-cashback">${c.cashback}</div>
+            <h3 class="card-title">${c.name}</h3>
+            <p class="card-description">${typeof c.desc === 'object' ? (c.desc[currentLang] || c.desc.en) : c.desc}</p>
+            <div class="code-badge" onclick="openModal('${c.code}', '${c.name}')">
+              <code>••••••••</code>
+              <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">REVEAL</span>
+            </div>
+            <a class="btn-deal" href="${c.link}" target="_blank">${currentLang === 'en' ? 'Shop' : 'Axtar'}</a>
+          </div>
+        </div>
+      `;
+    }
+  }).join('') : '<p style="grid-column: 1/-1; text-align: center; color: #999;">No coupons found</p>';
 });
 
-// Close modal on outside click
 document.getElementById('emailModal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('emailModal')) {
     closeModal();
