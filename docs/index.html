@@ -20,14 +20,19 @@
     .search-box input { flex: 1; padding: 0.9rem 1.2rem; border: 1px solid #ddd; border-radius: 8px; }
     .search-box button { background: var(--primary); color: #fff; border: none; padding: 0.9rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
     .categories { padding: 1.5rem 0; border-bottom: 1px solid #f0f0f0; }
-    .cat-list { display: flex; gap: 1.5rem; }
-    .cat-item { cursor: pointer; color: #666; text-decoration: none; font-weight: 500; }
+    .cat-list { display: flex; gap: 1.5rem; overflow-x: auto; }
+    .cat-item { cursor: pointer; color: #666; text-decoration: none; font-weight: 500; white-space: nowrap; }
     .cat-item.active { color: var(--primary); border-bottom: 3px solid var(--primary); }
+    .store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .store-card { background: #fff; border-radius: 12px; border: 1px solid #e9e6f9; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; }
+    .store-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
+    .store-logo { font-size: 3rem; margin-bottom: 1rem; }
+    .store-name { font-size: 1.1rem; font-weight: 800; color: #111; margin-bottom: 0.5rem; }
+    .store-count { font-size: 0.85rem; color: #999; }
     .coupon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .coupon-card { background: #fff; border-radius: 12px; overflow: visible; border: 1px solid #e9e6f9; display: flex; flex-direction: column; cursor: pointer; transition: all 0.3s; position: relative; }
+    .coupon-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e9e6f9; display: flex; flex-direction: column; cursor: pointer; transition: all 0.3s; position: relative; }
     .coupon-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
-    .coupon-card.partner-card { aspect-ratio: 1; overflow: hidden; }
-    .coupon-card .discount-badge { display: block; }
+    .coupon-card.partner-card { aspect-ratio: 1; }
     .card-image-container { width: 100%; height: 180px; background: linear-gradient(135deg, #e8f3ff, #f5f0ff); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
     .card-content { padding: 1.2rem; flex: 1; }
     .card-title { font-size: 0.95rem; font-weight: 800; color: #111; }
@@ -38,7 +43,7 @@
     .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #f5f5f5; color: #555; text-decoration: none; transition: 0.2s; }
     .social-link:hover { background: var(--primary); color: #fff; }
     .discount-badge { position: absolute; top: -12px; right: 8px; background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; padding: 0.8rem 1.2rem; border-radius: 8px; font-weight: 900; font-size: 1.4rem; z-index: 20; box-shadow: 0 4px 12px rgba(255,107,107,0.4); border: 3px solid white; }
-    .partner-content { width: 100%; height: 100%; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 1.5rem; color: white; background-color: rgba(0,0,0,0.3); }
+    .partner-content { width: 100%; height: 100%; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 1.5rem; color: white; }
     .email-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; }
     .email-modal.active { display: flex; }
     .modal-content { background: #fff; border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; }
@@ -47,10 +52,14 @@
     .coupon-reveal { background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
     .coupon-reveal.show { display: block; }
     .coupon-reveal code { display: block; background: #fff; padding: 1rem; border: 2px dashed var(--primary); border-radius: 6px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-align: center; }
+    .back-btn { background: #f5f5f5; border: none; padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 1.5rem; display: none; }
+    .back-btn.show { display: inline-block; }
+    .back-btn:hover { background: #e0e0e0; }
+    .section-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 1.5rem; }
     footer { background: #f5f5f5; padding: 2rem 0; text-align: center; margin-top: 3rem; }
-    @media (max-width: 1024px) { .coupon-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px) { .coupon-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .coupon-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1024px) { .store-grid { grid-template-columns: repeat(3, 1fr); } .coupon-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .store-grid { grid-template-columns: repeat(2, 1fr); } .coupon-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .store-grid { grid-template-columns: 1fr; } .coupon-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -96,9 +105,11 @@
   </div>
 </section>
 
-<section>
-  <div class="container-fluid px-3 px-md-5" style="padding: 2rem 0;">
-    <h2 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 1.5rem;">Coupons</h2>
+<section style="padding: 2rem 0;">
+  <div class="container-fluid px-3 px-md-5">
+    <button class="back-btn" onclick="backToCategories()">← Back to Categories</button>
+    <h2 class="section-title" id="viewTitle">Stores & Coupons</h2>
+    <div id="storeGrid" class="store-grid"></div>
     <div id="couponGrid" class="coupon-grid"></div>
   </div>
 </section>
@@ -123,42 +134,82 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-const COUPONS = [
-  { id: 1, name: 'VidIQ', emoji: '🎥', cat: 'tech', disc: '50%', code: 'VIDIQ50', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true },
-  { id: 2, name: 'ElevenLabs', emoji: '🎙️', cat: 'tech', disc: '20%', code: 'EL20', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true },
-  { id: 3, name: 'Hostinger', emoji: '🌐', cat: 'hosting', disc: '20%', code: 'KUPONHUB20', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true }
-];
+const STORES = {
+  shopping: [
+    { id: 1, name: 'TrendyOL', emoji: '🛍️', coupons: [] },
+    { id: 2, name: 'Amazon', emoji: '📦', coupons: [] }
+  ],
+  tech: [
+    { id: 3, name: 'VidIQ', emoji: '🎥', coupons: [
+      { id: 1, code: 'VIDIQ50', disc: '50%', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true }
+    ]},
+    { id: 4, name: 'ElevenLabs', emoji: '🎙️', coupons: [
+      { id: 2, code: 'EL20', disc: '20%', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true }
+    ]}
+  ],
+  hosting: [
+    { id: 5, name: 'Hostinger', emoji: '🌐', coupons: [
+      { id: 3, code: 'KUPONHUB20', disc: '20%', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true }
+    ]}
+  ]
+};
 
-const SOCIAL = [
-  { icon: 'fab fa-facebook', url: 'https://www.facebook.com/sharer/sharer.php?u=' },
-  { icon: 'fab fa-twitter', url: 'https://twitter.com/intent/tweet?url=' },
-  { icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/sharing/share-offsite/?url=' },
-  { icon: 'fab fa-reddit', url: 'https://reddit.com/submit?url=' },
-  { icon: 'fab fa-whatsapp', url: 'https://wa.me/?text=' },
-  { icon: 'fab fa-telegram', url: 'https://t.me/share/url?url=' }
-];
+let lang = 'en', cat = 'all', store = null, coupon = null;
 
-let lang = 'en', cat = 'all', coupon = null;
+function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); render(); }
+function filterCategory(c) { cat = c; store = null; document.querySelectorAll('.cat-item').forEach(e => e.classList.remove('active')); event.target.classList.add('active'); render(); }
+function backToCategories() { store = null; render(); }
 
-function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); renderCoupons(); }
-function filterCategory(c) { cat = c; document.querySelectorAll('.cat-item').forEach(e => e.classList.remove('active')); event.target.classList.add('active'); renderCoupons(); }
-function doSearch() {}
+function render() {
+  const back = document.querySelector('.back-btn');
+  const title = document.getElementById('viewTitle');
+  const storeGrid = document.getElementById('storeGrid');
+  const couponGrid = document.getElementById('couponGrid');
 
-function renderCoupons() {
-  let html = COUPONS.filter(c => cat === 'all' || c.cat === cat).map(c => {
-    if (c.partner) {
-      let bg = c.code === 'EL20' ? 'public/images/elevenlabs-logo.jpg' : 'public/images/vidiq-card.png';
-      return '<div class="coupon-card partner-card" style="background-image: url(' + bg + '); background-size: cover;" onclick="openModal(' + c.id + ')"><div class="discount-badge">' + c.disc + '</div><div class="partner-content"><div style="font-size:1.4rem; font-weight:900; color:white;">' + c.name + '</div></div></div>';
-    }
-    let social = SOCIAL.map(s => '<a href="' + s.url + encodeURIComponent(window.location.href) + '" target="_blank" class="social-link"><i class="' + s.icon + '"></i></a>').join('');
-    return '<div class="coupon-card"><div class="card-image-container">' + c.emoji + '</div><div class="card-content"><h3 class="card-title">' + c.name + '</h3><p style="font-size:0.85rem; color:#555; margin-bottom:1rem;">' + c.desc + '</p><div class="code-badge" onclick="openModal(' + c.id + ')"><code>••••••••</code></div><a class="btn-deal" href="' + c.link + '" target="_blank">Shop</a><div class="social-share">' + social + '</div></div></div>';
-  }).join('');
-  document.getElementById('couponGrid').innerHTML = html;
+  if (store) {
+    back.classList.add('show');
+    title.textContent = store.name + ' - Coupons';
+    storeGrid.innerHTML = '';
+    couponGrid.innerHTML = store.coupons.map(c => renderCoupon(c)).join('');
+  } else {
+    back.classList.remove('show');
+    title.textContent = cat.charAt(0).toUpperCase() + cat.slice(1) + ' - Stores';
+    couponGrid.innerHTML = '';
+    storeGrid.innerHTML = (STORES[cat] || []).map(s => `
+      <div class="store-card" onclick="selectStore('${cat}', ${s.id})">
+        <div class="store-logo">${s.emoji}</div>
+        <div class="store-name">${s.name}</div>
+        <div class="store-count">${s.coupons.length} offers</div>
+      </div>
+    `).join('');
+  }
 }
 
-function openModal(id) {
-  coupon = COUPONS[id - 1];
-  document.getElementById('emailForm').style.display = coupon.partner ? 'block' : 'block';
+function selectStore(category, storeId) {
+  store = STORES[category].find(s => s.id === storeId);
+  render();
+}
+
+function renderCoupon(c) {
+  let social = '<a href="#" class="social-link"><i class="fab fa-facebook"></i></a><a href="#" class="social-link"><i class="fab fa-twitter"></i></a>';
+  return `
+    <div class="coupon-card">
+      <div class="card-image-container">${c.emoji || '🎁'}</div>
+      <div class="discount-badge">${c.disc}</div>
+      <div class="card-content">
+        <h3 class="card-title">${store.name}</h3>
+        <p style="font-size:0.85rem; color:#555; margin-bottom:1rem;">${c.desc}</p>
+        <div class="code-badge" onclick="openModal('${c.code}')"><code>••••••••</code></div>
+        <a class="btn-deal" href="${c.link}" target="_blank">Shop</a>
+        <div class="social-share">${social}</div>
+      </div>
+    </div>
+  `;
+}
+
+function openModal(code) {
+  coupon = code;
+  document.getElementById('emailForm').style.display = 'block';
   document.getElementById('couponReveal').classList.remove('show');
   document.getElementById('emailInput').value = '';
   document.getElementById('emailModal').classList.add('active');
@@ -170,22 +221,20 @@ function handleEmailSubmit(e) {
   const fd = new FormData();
   fd.append('Timestamp', new Date());
   fd.append('Email', email);
-  fd.append('Coupon', coupon.code);
+  fd.append('Coupon', coupon);
   fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWxUHsSaurWmbjlUEmLpWyFijcSUJPKjTKPzFjVV61p9c2pA/formResponse', { method: 'POST', body: fd, mode: 'no-cors' });
   
-  if (coupon.partner) {
-    setTimeout(() => { window.location.href = coupon.link; }, 300);
+  if (store && store.coupons.find(c => c.code === coupon)?.partner) {
+    setTimeout(() => { window.location.href = store.coupons.find(c => c.code === coupon).link; }, 300);
   } else {
     document.getElementById('emailForm').style.display = 'none';
-    document.getElementById('couponCode').textContent = coupon.code;
+    document.getElementById('couponCode').textContent = coupon;
     document.getElementById('couponReveal').classList.add('show');
   }
 }
 
-function copyCoupon() {
-  navigator.clipboard.writeText(coupon.code);
-  alert('Copied!');
-}
+function copyCoupon() { navigator.clipboard.writeText(coupon); alert('Copied!'); }
+function doSearch() {}
 
 document.getElementById('emailModal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('emailModal')) document.getElementById('emailModal').classList.remove('active');
