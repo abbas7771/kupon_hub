@@ -135,23 +135,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const STORES = {
-  shopping: [
-    { id: 1, name: 'TrendyOL', emoji: '🛍️', coupons: [] },
-    { id: 2, name: 'Amazon', emoji: '📦', coupons: [] }
+  all: [
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true}]},
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]},
+    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
   ],
+  shopping: [{id: 1, name: 'TrendyOL', emoji: '🛍️', coupons: []}],
+  travel: [{id: 2, name: 'Booking', emoji: '✈️', coupons: []}],
   tech: [
-    { id: 3, name: 'VidIQ', emoji: '🎥', coupons: [
-      { id: 1, code: 'VIDIQ50', disc: '50%', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true }
-    ]},
-    { id: 4, name: 'ElevenLabs', emoji: '🎙️', coupons: [
-      { id: 2, code: 'EL20', disc: '20%', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true }
-    ]}
+    { id: 3, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true}]},
+    { id: 4, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]}
   ],
-  hosting: [
-    { id: 5, name: 'Hostinger', emoji: '🌐', coupons: [
-      { id: 3, code: 'KUPONHUB20', disc: '20%', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true }
-    ]}
-  ]
+  vpn: [{id: 5, name: 'NordVPN', emoji: '🔒', coupons: []}],
+  fashion: [{id: 6, name: 'ASOS', emoji: '👗', coupons: []}],
+  hosting: [{id: 7, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}]
 };
 
 let lang = 'en', cat = 'all', store = null, coupon = null;
@@ -199,8 +196,7 @@ function renderCoupon(c) {
       <div class="card-content">
         <h3 class="card-title">${store.name}</h3>
         <p style="font-size:0.85rem; color:#555; margin-bottom:1rem;">${c.desc}</p>
-        <div class="code-badge" onclick="openModal('${c.code}')"><code>••••••••</code></div>
-        <a class="btn-deal" href="${c.link}" target="_blank">Shop</a>
+        <button class="btn-deal" onclick="openModal('${c.code}')">Get Coupon</button>
         <div class="social-share">${social}</div>
       </div>
     </div>
