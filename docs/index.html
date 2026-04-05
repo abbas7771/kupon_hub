@@ -8,11 +8,11 @@
   <meta name="keywords" content="coupons, promo codes, cashback, deals, discounts, shopping, travel, VPN, fashion">
   <meta name="author" content="KuponHub">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://abbas7771.github.io/kupon_hub/index-final.html">
+  <link rel="canonical" href="https://kuponhub.world/">
   <meta property="og:title" content="KuponHub - Deals & Coupons">
   <meta property="og:description" content="Find the best coupons and cashback deals. Subscribe to unlock exclusive discounts.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://abbas7771.github.io/kupon_hub/index-final.html">
+  <meta property="og:url" content="https://kuponhub.world/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KuponHub - Deals & Coupons">
   <meta name="twitter:description" content="Find the best coupons and cashback deals.">
@@ -192,15 +192,14 @@
     .partner-content {
       width: 100%;
       height: 100%;
-      background-image: url('public/images/vidiq-card.png');
       background-size: cover;
       background-position: center;
-      background-color: rgba(0,0,0,0.3);
       border-radius: 12px;
       display: flex;
       align-items: flex-end;
       padding: 1.5rem;
       color: white;
+      background-color: rgba(0,0,0,0.3);
     }
 
     .partner-title {
@@ -411,6 +410,26 @@ const COUPONS = [
     expires: '2026-12-31',
     link: 'https://vidiq.com/kuponhub',
     isPartner: true
+  },
+  {
+    id: 2,
+    name: 'ElevenLabs',
+    emoji: '🎙️',
+    category: 'tech',
+    discount: '20%',
+    code: 'ELEVENLABS20',
+    desc: {
+      en: 'AI text-to-speech and voice generation',
+      az: 'AI mətn-sözə və səs generasiyası',
+      tr: 'AI metin-konuşma ve ses üretimi',
+      ru: 'ИИ преобразование текста в речь и генерация голоса',
+      zh: 'AI文本转语音和语音生成',
+      es: 'Generación de texto a voz e IA de voz'
+    },
+    cashback: 'Referral',
+    expires: '2026-12-31',
+    link: 'https://try.elevenlabs.io/ei50op7ldiit',
+    isPartner: true
   }
 ];
 
@@ -512,7 +531,7 @@ function handleEmailSubmit(e) {
 
   if (currentModalType === 'partner') {
     setTimeout(() => {
-      window.open('https://vidiq.com/kuponhub', '_blank');
+      window.location.href = currentCoupon === 'ELEVENLABS20' ? 'https://try.elevenlabs.io/ei50op7ldiit' : 'https://vidiq.com/kuponhub';
       closeModal();
     }, 500);
   } else {
