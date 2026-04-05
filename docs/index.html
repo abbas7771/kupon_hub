@@ -188,7 +188,16 @@ function selectStore(category, storeId) {
 }
 
 function renderCoupon(c) {
-  let social = '<a href="#" class="social-link"><i class="fab fa-facebook"></i></a><a href="#" class="social-link"><i class="fab fa-twitter"></i></a>';
+  const shareText = 'Check out ' + store.name + ' coupon: ' + c.code + ' at KuponHub!';
+  const shareUrl = window.location.href;
+  const social = `
+    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Reddit"><i class="fab fa-reddit"></i></a>
+    <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
+  `;
   return `
     <div class="coupon-card">
       <div class="card-image-container">${c.emoji || '🎁'}</div>
