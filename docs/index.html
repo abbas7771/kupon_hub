@@ -163,24 +163,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// Define empty translations object first
-if (typeof TRANSLATIONS === 'undefined') {
-  const TRANSLATIONS = {};
-}
-</script>
-<script src="hostinger-translations.js"></script>
-<script src="hostinger-descriptions.js"></script>
-<script src="hostinger-data.js"></script>
-<script src="seo-metadata.js"></script>
-<script>
-// Load Hostinger data
-if (typeof HOSTINGER_COUPONS !== 'undefined' && HOSTINGER_COUPONS.length > 0) {
-  STORES.hosting[0].coupons = HOSTINGER_COUPONS.map(c => ({...c, partner: true}));
-  STORES.all = STORES.all.filter(s => s.name !== 'Hostinger');
-  STORES.all.push({id: 3, name: 'Hostinger', emoji: '🌐', coupons: HOSTINGER_COUPONS.map(c => ({...c, partner: true}))});
-}
-</script>
-<script>
 const TRANSLATIONS = {
   en: { featured: 'Featured daily deals and coupons', cashback: 'Get cashback and extra savings on your favorite brands', search: 'Search stores...', all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting', back: '← Back', offers: 'offers', exclusive: 'Exclusive deals and coupons for', getCoupon: 'Get Coupon', unlockCoupon: 'Unlock Coupon', subscribe: 'Subscribe to get the code', yourCode: 'Your code:', copy: 'Copy', copyright: '© 2026 KuponHub', vidiq_desc: 'Get 50% off YouTube analytics tools. Perfect for content creators looking to optimize their channel performance.', elevenlabs_desc: 'Enjoy 20% discount on premium AI text-to-speech services. Create natural-sounding voices for your projects.', hostinger_desc: 'Save 20% on all Hostinger hosting packages. Fast, reliable hosting with 24/7 support included.' },
   tr: { featured: 'Günlük fırsatlar ve kuponlar', cashback: 'Favori markalarda geri ödeme ve ekstra tasarruf alın', search: 'Mağazaları ara...', all: 'Tümü', shopping: 'Alışveriş', travel: 'Seyahat', tech: 'Teknoloji', vpn: 'VPN', fashion: 'Moda', hosting: 'Hosting', back: '← Geri', offers: 'teklif', exclusive: 'Özel fırsatlar ve kuponlar', getCoupon: 'Kuponu Al', unlockCoupon: 'Kuponu Açın', subscribe: 'Kodu almak için abone olun', yourCode: 'Sizin kodunuz:', copy: 'Kopyala', copyright: '© 2026 KuponHub', vidiq_desc: 'YouTube analitik araçlarında %50 indirim alın. Kanal performansınızı optimize etmek isteyen içerik oluşturucular için mükemmeldir.', elevenlabs_desc: 'Premium AI metin-konuşma hizmetlerinde %20 indirim. Projeleriniz için doğal ses oluşturun.', hostinger_desc: 'Tüm Hostinger hosting paketlerinde %20 tasarruf yapın. Hızlı, güvenilir hosting ve 24/7 destek dahil.' },
