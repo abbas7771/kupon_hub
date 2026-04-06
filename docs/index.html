@@ -29,21 +29,31 @@
     .store-logo { font-size: 3rem; margin-bottom: 1rem; }
     .store-name { font-size: 1.1rem; font-weight: 800; color: #111; margin-bottom: 0.5rem; }
     .store-count { font-size: 0.85rem; color: #999; }
-    .coupon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .coupon-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e9e6f9; display: flex; flex-direction: column; cursor: pointer; transition: all 0.3s; position: relative; }
-    .coupon-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
-    .coupon-card.partner-card { aspect-ratio: 1; }
-    .card-image-container { width: 100%; height: 180px; background: linear-gradient(135deg, #e8f3ff, #f5f0ff); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-    .card-content { padding: 1.2rem; flex: 1; }
-    .card-title { font-size: 0.95rem; font-weight: 800; color: #111; }
-    .code-badge { background: var(--light-bg); border: 1px dashed var(--primary); padding: 0.7rem; border-radius: 6px; margin: 0.8rem 0; cursor: pointer; }
-    .btn-deal { background: var(--primary); color: #fff; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; font-weight: 700; width: 100%; cursor: pointer; margin-bottom: 0.8rem; }
-    .btn-deal:hover { background: var(--secondary); }
-    .social-share { display: flex; gap: 0.8rem; padding-top: 1rem; border-top: 1px solid #e9e6f9; }
-    .social-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #f5f5f5; color: #555; text-decoration: none; transition: 0.2s; }
+    /* Store Detail */
+    .store-header { background: linear-gradient(135deg, #f9f7ff, #f5f0ff); padding: 3rem 0; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem; }
+    .store-header-content { display: flex; align-items: center; gap: 3rem; }
+    .store-header-logo { font-size: 6rem; }
+    .store-header-info h1 { font-size: 2.5rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
+    .store-header-info p { color: #666; font-size: 1.1rem; }
+    .coupon-item { background: #fff; border: 1px solid #e9e6f9; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; transition: all 0.3s; position: relative; }
+    .coupon-item:hover { box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
+    .coupon-item-header { display: flex; align-items: flex-start; gap: 2rem; margin-bottom: 1.5rem; }
+    .coupon-discount { background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; padding: 1.5rem; border-radius: 12px; text-align: center; min-width: 120px; font-weight: 900; font-size: 1.8rem; }
+    .coupon-info { flex: 1; }
+    .coupon-title { font-size: 1.4rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
+    .coupon-desc { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
+    .coupon-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .coupon-btn { background: var(--primary); color: #fff; border: none; padding: 0.9rem 2rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+    .coupon-btn:hover { background: var(--secondary); }
+    .coupon-btn.secondary { background: #f5f5f5; color: #333; }
+    .coupon-btn.secondary:hover { background: #e0e0e0; }
+    .social-share { display: flex; gap: 0.8rem; margin-top: 1rem; }
+    .social-link { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #f5f5f5; color: #555; text-decoration: none; transition: 0.2s; font-size: 1rem; }
     .social-link:hover { background: var(--primary); color: #fff; }
-    .discount-badge { position: absolute; top: -12px; right: 8px; background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; padding: 0.8rem 1.2rem; border-radius: 8px; font-weight: 900; font-size: 1.4rem; z-index: 20; box-shadow: 0 4px 12px rgba(255,107,107,0.4); border: 3px solid white; }
-    .partner-content { width: 100%; height: 100%; background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 1.5rem; color: white; }
+    .back-btn { background: #f5f5f5; border: none; padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 2rem; display: none; }
+    .back-btn.show { display: inline-block; }
+    .back-btn:hover { background: #e0e0e0; }
+    .section-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 1.5rem; }
     .email-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; }
     .email-modal.active { display: flex; }
     .modal-content { background: #fff; border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; }
@@ -52,21 +62,15 @@
     .coupon-reveal { background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
     .coupon-reveal.show { display: block; }
     .coupon-reveal code { display: block; background: #fff; padding: 1rem; border: 2px dashed var(--primary); border-radius: 6px; font-size: 1.1rem; font-weight: 700; color: var(--primary); text-align: center; }
-    .back-btn { background: #f5f5f5; border: none; padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 1.5rem; display: none; }
-    .back-btn.show { display: inline-block; }
-    .back-btn:hover { background: #e0e0e0; }
-    .section-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 1.5rem; }
     footer { background: #f5f5f5; padding: 2rem 0; text-align: center; margin-top: 3rem; }
-    @media (max-width: 1024px) { .store-grid { grid-template-columns: repeat(3, 1fr); } .coupon-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px) { .store-grid { grid-template-columns: repeat(2, 1fr); } .coupon-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 480px) { .store-grid { grid-template-columns: 1fr; } .coupon-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .store-header-content { flex-direction: column; text-align: center; } .coupon-item-header { flex-direction: column; } .coupon-discount { min-width: auto; width: 100%; } }
   </style>
 </head>
 <body>
 
 <nav class="navbar">
   <div class="container-fluid px-3 px-md-5">
-    <span class="navbar-brand">🎟️ KuponHub</span>
+    <span class="navbar-brand" style="cursor: pointer;" onclick="backToHome()">🎟️ KuponHub</span>
     <div class="nav-right">
       <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
         <option value="en">EN</option>
@@ -80,7 +84,7 @@
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="heroSection">
   <div class="container-fluid px-3 px-md-5">
     <h1>Featured daily deals and coupons</h1>
     <p>Get cashback and extra savings on your favorite brands</p>
@@ -91,7 +95,7 @@
   </div>
 </section>
 
-<section class="categories">
+<section class="categories" id="categoriesSection">
   <div class="container-fluid px-3 px-md-5">
     <div class="cat-list">
       <a class="cat-item active" onclick="filterCategory('all')">All</a>
@@ -105,12 +109,27 @@
   </div>
 </section>
 
-<section style="padding: 2rem 0;">
+<section id="mainSection" style="padding: 2rem 0;">
   <div class="container-fluid px-3 px-md-5">
     <button class="back-btn" onclick="backToCategories()">← Back to Categories</button>
     <h2 class="section-title" id="viewTitle">Stores & Coupons</h2>
     <div id="storeGrid" class="store-grid"></div>
-    <div id="couponGrid" class="coupon-grid"></div>
+  </div>
+</section>
+
+<section id="storeDetailSection" style="display: none;">
+  <div class="container-fluid px-3 px-md-5">
+    <button class="back-btn show" onclick="backToCategories()">← Back to Categories</button>
+    <div class="store-header">
+      <div class="store-header-content">
+        <div class="store-header-logo" id="storeDetailLogo"></div>
+        <div class="store-header-info">
+          <h1 id="storeDetailName"></h1>
+          <p id="storeDetailDesc"></p>
+        </div>
+      </div>
+    </div>
+    <div id="couponsListContainer"></div>
   </div>
 </section>
 
@@ -125,7 +144,7 @@
     <div id="couponReveal" class="coupon-reveal">
       <p style="color: #666; font-size: 0.85rem; margin-bottom: 0.5rem;">Your code:</p>
       <code id="couponCode"></code>
-      <button onclick="copyCoupon()" class="btn-deal">Copy</button>
+      <button onclick="copyCoupon()" class="coupon-btn">Copy</button>
     </div>
   </div>
 </div>
@@ -136,44 +155,74 @@
 <script>
 const STORES = {
   all: [
-    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true}]},
-    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]},
-    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: 'Get 50% off YouTube analytics tools. Perfect for content creators looking to optimize their channel performance.', link: 'https://vidiq.com/kuponhub', partner: true}]},
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', desc: 'Enjoy 20% discount on premium AI text-to-speech services. Create natural-sounding voices for your projects.', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]},
+    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting Plans', desc: 'Save 20% on all Hostinger hosting packages. Fast, reliable hosting with 24/7 support included.', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
   ],
-  shopping: [{id: 1, name: 'TrendyOL', emoji: '🛍️', coupons: []}],
-  travel: [{id: 2, name: 'Booking', emoji: '✈️', coupons: []}],
+  shopping: [],
+  travel: [],
   tech: [
-    { id: 3, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', desc: 'YouTube tools', link: 'https://vidiq.com/kuponhub', partner: true}]},
-    { id: 4, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', desc: 'AI voice', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]}
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: 'Get 50% off YouTube analytics tools. Perfect for content creators.', link: 'https://vidiq.com/kuponhub', partner: true}]},
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', desc: 'Enjoy 20% discount on premium AI text-to-speech.', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]}
   ],
-  vpn: [{id: 5, name: 'NordVPN', emoji: '🔒', coupons: []}],
-  fashion: [{id: 6, name: 'ASOS', emoji: '👗', coupons: []}],
-  hosting: [{id: 7, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', desc: 'Web hosting', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}]
+  vpn: [],
+  fashion: [],
+  hosting: [{ id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting Plans', desc: 'Save 20% on Hostinger hosting.', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}]
 };
 
 let lang = 'en', cat = 'all', store = null, coupon = null;
 
-function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); render(); }
+function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); }
 function filterCategory(c) { cat = c; store = null; document.querySelectorAll('.cat-item').forEach(e => e.classList.remove('active')); event.target.classList.add('active'); render(); }
+function backToHome() { store = null; cat = 'all'; render(); }
 function backToCategories() { store = null; render(); }
+function doSearch() {}
 
 function render() {
-  const back = document.querySelector('.back-btn');
-  const title = document.getElementById('viewTitle');
-  const storeGrid = document.getElementById('storeGrid');
-  const couponGrid = document.getElementById('couponGrid');
+  const main = document.getElementById('mainSection');
+  const detail = document.getElementById('storeDetailSection');
+  const grid = document.getElementById('storeGrid');
 
   if (store) {
-    back.classList.add('show');
-    title.textContent = store.name + ' - Coupons';
-    storeGrid.innerHTML = '';
-    couponGrid.innerHTML = store.coupons.map(c => renderCoupon(c)).join('');
+    main.style.display = 'none';
+    detail.style.display = 'block';
+    document.getElementById('storeDetailLogo').textContent = store.emoji;
+    document.getElementById('storeDetailName').textContent = store.name;
+    document.getElementById('storeDetailDesc').textContent = 'Exclusive deals and coupons for ' + store.name;
+    let html = '';
+    store.coupons.forEach(c => {
+      const shareText = store.name + ' - ' + c.title + ': ' + c.code;
+      html += `
+        <div class="coupon-item">
+          <div class="coupon-item-header">
+            <div class="coupon-discount">${c.disc}</div>
+            <div class="coupon-info">
+              <h3 class="coupon-title">${c.title}</h3>
+              <p class="coupon-desc">${c.desc}</p>
+              <div class="coupon-buttons">
+                <button class="coupon-btn" onclick="openModal('${c.code}')">Get Coupon</button>
+                <button class="coupon-btn secondary" onclick="window.open('${c.link}', '_blank')">Visit Store</button>
+              </div>
+              <div class="social-share">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Reddit"><i class="fab fa-reddit"></i></a>
+                <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + window.location.href)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    document.getElementById('couponsListContainer').innerHTML = html;
   } else {
-    back.classList.remove('show');
-    title.textContent = cat.charAt(0).toUpperCase() + cat.slice(1) + ' - Stores';
-    couponGrid.innerHTML = '';
-    storeGrid.innerHTML = (STORES[cat] || []).map(s => `
-      <div class="store-card" onclick="selectStore('${cat}', ${s.id})">
+    main.style.display = 'block';
+    detail.style.display = 'none';
+    let stores = STORES[cat] || [];
+    grid.innerHTML = stores.map(s => `
+      <div class="store-card" onclick="selectStore(${s.id})">
         <div class="store-logo">${s.emoji}</div>
         <div class="store-name">${s.name}</div>
         <div class="store-count">${s.coupons.length} offers</div>
@@ -182,34 +231,12 @@ function render() {
   }
 }
 
-function selectStore(category, storeId) {
-  store = STORES[category].find(s => s.id === storeId);
+function selectStore(storeId) {
+  for (let category in STORES) {
+    let found = STORES[category].find(s => s.id === storeId);
+    if (found) { store = found; break; }
+  }
   render();
-}
-
-function renderCoupon(c) {
-  const shareText = 'Check out ' + store.name + ' coupon: ' + c.code + ' at KuponHub!';
-  const shareUrl = window.location.href;
-  const social = `
-    <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
-    <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    <a href="https://reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Reddit"><i class="fab fa-reddit"></i></a>
-    <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
-  `;
-  return `
-    <div class="coupon-card">
-      <div class="card-image-container">${c.emoji || '🎁'}</div>
-      <div class="discount-badge">${c.disc}</div>
-      <div class="card-content">
-        <h3 class="card-title">${store.name}</h3>
-        <p style="font-size:0.85rem; color:#555; margin-bottom:1rem;">${c.desc}</p>
-        <button class="btn-deal" onclick="openModal('${c.code}')">Get Coupon</button>
-        <div class="social-share">${social}</div>
-      </div>
-    </div>
-  `;
 }
 
 function openModal(code) {
@@ -229,23 +256,20 @@ function handleEmailSubmit(e) {
   fd.append('Coupon', coupon);
   fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWxUHsSaurWmbjlUEmLpWyFijcSUJPKjTKPzFjVV61p9c2pA/formResponse', { method: 'POST', body: fd, mode: 'no-cors' });
   
-  if (store && store.coupons.find(c => c.code === coupon)?.partner) {
-    setTimeout(() => { window.location.href = store.coupons.find(c => c.code === coupon).link; }, 300);
-  } else {
+  setTimeout(() => {
     document.getElementById('emailForm').style.display = 'none';
     document.getElementById('couponCode').textContent = coupon;
     document.getElementById('couponReveal').classList.add('show');
-  }
+  }, 300);
 }
 
 function copyCoupon() { navigator.clipboard.writeText(coupon); alert('Copied!'); }
-function doSearch() {}
 
 document.getElementById('emailModal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('emailModal')) document.getElementById('emailModal').classList.remove('active');
 });
 
-changeLanguage('en');
+render();
 </script>
 
 </body>
