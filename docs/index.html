@@ -120,18 +120,24 @@
 </section>
 
 <section id="storeDetailSection" style="display: none;">
-  <div class="container-fluid px-3 px-md-5">
-    <button class="back-btn show" id="backBtn2" onclick="backToCategories()">← Back</button>
-    <div class="store-header">
-      <div class="store-header-content">
-        <div class="store-header-logo" id="storeDetailLogo"></div>
-        <div class="store-header-info">
-          <h1 id="storeDetailName"></h1>
-          <p id="storeDetailDesc"></p>
+  <div class="container-fluid" style="padding: 0;">
+    <div class="container-fluid px-3 px-md-5">
+      <button class="back-btn show" id="backBtn2" onclick="backToCategories()">← Back</button>
+    </div>
+    <div class="store-header" id="storeHeader" style="background: linear-gradient(135deg, #fff68f, #e0e0e0); padding: 2rem; margin-bottom: 2rem;">
+      <div class="container-fluid px-3 px-md-5">
+        <div class="store-header-content" style="display: flex; align-items: center; gap: 2rem;">
+          <div class="store-header-logo" id="storeDetailLogo" style="font-size: 5rem; min-width: 100px;"></div>
+          <div class="store-header-info" style="flex: 1;">
+            <h1 id="storeDetailName" style="font-size: 2.5rem; font-weight: 900; color: #111; margin-bottom: 0.5rem;"></h1>
+            <p id="storeDetailDesc" style="color: #666; font-size: 1.1rem; margin: 0;"></p>
+          </div>
         </div>
       </div>
     </div>
-    <div id="couponsListContainer"></div>
+    <div class="container-fluid px-3 px-md-5">
+      <div id="couponsListContainer"></div>
+    </div>
   </div>
 </section>
 
