@@ -152,6 +152,10 @@
   <div class="container-fluid px-3 px-md-5">
     <h1 id="heroTitle">Featured daily deals and coupons</h1>
     <p id="heroSubtitle">Get cashback and extra savings on your favorite brands</p>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search stores..." style="flex: 1; padding: 0.9rem 1.2rem; border: 1px solid #ddd; border-radius: 8px;">
+      <button onclick="searchStores(document.getElementById('searchInput').value)" style="background: #f6546a; color: white; border: none; padding: 0.9rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer;">Search</button>
+    </div>
   </div>
 </section>
 
@@ -278,6 +282,16 @@ let coupon = null;
 document.addEventListener('DOMContentLoaded', () => {
   hostingerCoupons = STORES.hosting[0].coupons.slice();
   STORES.all[2].coupons = hostingerCoupons;
+  
+  // Search handler
+  document.getElementById('searchInput').addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') searchStores(e.target.value);
+  });
+  document.querySelector('.search-box button').addEventListener('click', () => {
+    searchStores(document.getElementById('searchInput').value);
+  });
+  
+  restoreState();
   updateUI();
   render();
 });
@@ -318,13 +332,32 @@ function changeLanguage(l) {
 function filterCategory(c) {
   cat = c;
   store = null;
+  saveState();
   render();
 }
 
 function backToHome() {
   store = null;
   cat = 'all';
+  saveState();
   render();
+}
+
+function saveState() {
+  localStorage.setItem('lastCat', cat);
+  localStorage.setItem('lastStore', store ? store.id : null);
+}
+
+function restoreState() {
+  const lastCat = localStorage.getItem('lastCat') || 'all';
+  const lastStoreId = localStorage.getItem('lastStore');
+  cat = lastCat;
+  if (lastStoreId) {
+    for (let category in STORES) {
+      const found = STORES[category].find(s => s.id == lastStoreId);
+      if (found) { store = found; break; }
+    }
+  }
 }
 
 function backToCategories() {
@@ -399,10 +432,46 @@ function selectStore(storeId) {
     const found = STORES[category].find(s => s.id === storeId);
     if (found) {
       store = found;
+      saveState();
       break;
     }
   }
   render();
+}
+
+function searchStores(query) {
+  const q = query.toLowerCase();
+  if (!q) {
+    restoreState();
+    render();
+    return;
+  }
+  
+  let results = [];
+  for (let category in STORES) {
+    STORES[category].forEach(s => {
+      if (s.name.toLowerCase().includes(q) || s.coupons.some(c => c.title.toLowerCase().includes(q))) {
+        results.push(s);
+      }
+    });
+  }
+  
+  const grid = document.getElementById('storeGrid');
+  const mainSection = document.getElementById('mainSection');
+  const detailSection = document.getElementById('storeDetailSection');
+  const viewTitle = document.getElementById('viewTitle');
+  
+  mainSection.style.display = 'block';
+  detailSection.style.display = 'none';
+  viewTitle.textContent = results.length + ' ' + t('offers') + ' found';
+  
+  grid.innerHTML = results.map(s => `
+    <div class="store-card" onclick="selectStore(${s.id})">
+      <div class="store-logo">${s.emoji}</div>
+      <div class="store-name">${s.name}</div>
+      <div class="store-count">${s.coupons.length} ${t('offers')}</div>
+    </div>
+  `).join('');
 }
 
 function openModal(code) {
