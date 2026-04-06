@@ -1,6 +1,11 @@
 // Hostinger Package Descriptions from Abbas's File
 // Format: { code: { tr: "Turkish description", en: "English", ru: "Russian", zh: "Chinese", es: "Spanish" } }
 
+// Initialize TRANSLATIONS if needed
+if (typeof TRANSLATIONS === 'undefined') {
+  var TRANSLATIONS = {};
+}
+
 const HOSTINGER_PACKAGE_DESCRIPTIONS = {
   PREMIUM20: {
     tr: '✓ 3 sayt ✓ 25.000 ziyarətçi/ay ✓ 20GB SSD ✓ Pulsuz SSL ✓ 20% endirim',
@@ -165,19 +170,21 @@ const HOSTINGER_PACKAGE_DESCRIPTIONS = {
   }
 };
 
-// Merge new descriptions into main HOSTINGER_TRANSLATIONS
-if (typeof HOSTINGER_TRANSLATIONS !== 'undefined') {
-  Object.keys(HOSTINGER_PACKAGE_DESCRIPTIONS).forEach(code => {
-    const descs = HOSTINGER_PACKAGE_DESCRIPTIONS[code];
-    Object.keys(descs).forEach(lang => {
-      if (HOSTINGER_TRANSLATIONS[lang]) {
-        const descKey = code.toLowerCase() + '_desc';
-        HOSTINGER_TRANSLATIONS[lang][code.toLowerCase() + '_package'] = descs[lang];
-      }
-    });
-  });
+// Merge new descriptions into TRANSLATIONS directly
+Object.keys(HOSTINGER_PACKAGE_DESCRIPTIONS).forEach(code => {
+  const descs = HOSTINGER_PACKAGE_DESCRIPTIONS[code];
+  const descKey = code.toLowerCase() + '_package';
   
-  // Update TRANSLATIONS object
+  Object.keys(descs).forEach(lang => {
+    if (!TRANSLATIONS[lang]) {
+      TRANSLATIONS[lang] = {};
+    }
+    TRANSLATIONS[lang][descKey] = descs[lang];
+  });
+});
+
+// Also merge HOSTINGER_TRANSLATIONS if it exists
+if (typeof HOSTINGER_TRANSLATIONS !== 'undefined') {
   Object.keys(HOSTINGER_TRANSLATIONS).forEach(langKey => {
     if (!TRANSLATIONS[langKey]) TRANSLATIONS[langKey] = {};
     Object.assign(TRANSLATIONS[langKey], HOSTINGER_TRANSLATIONS[langKey]);

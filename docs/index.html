@@ -257,7 +257,7 @@ function render() {
           <div class="coupon-middle">
             <h3 class="coupon-title">${c.title}</h3>
             <ul class="coupon-desc" style="list-style: none; padding: 0;">
-              <li>✓ ${(typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang] && TRANSLATIONS[lang][c.descKey]) ? TRANSLATIONS[lang][c.descKey] : (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS['en'] && TRANSLATIONS['en'][c.descKey]) ? TRANSLATIONS['en'][c.descKey] : 'Get exclusive offer'}</li>
+              <li>✓ ${TRANSLATIONS && TRANSLATIONS[lang] && TRANSLATIONS[lang][c.descKey] ? TRANSLATIONS[lang][c.descKey] : (TRANSLATIONS && TRANSLATIONS['en'] && TRANSLATIONS['en'][c.descKey] ? TRANSLATIONS['en'][c.descKey] : 'Get exclusive offer')}</li>
               <li>✓ Get exclusive code via email</li>
               <li>✓ Valid until latest deals</li>
             </ul>
