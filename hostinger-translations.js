@@ -128,8 +128,18 @@ const HOSTINGER_TRANSLATIONS = {
 };
 
 // Merge with existing translations
-Object.keys(HOSTINGER_TRANSLATIONS).forEach(lang => {
-  if (TRANSLATIONS[lang]) {
-    Object.assign(TRANSLATIONS[lang], HOSTINGER_TRANSLATIONS[lang]);
+Object.keys(HOSTINGER_TRANSLATIONS).forEach(langKey => {
+  if (!TRANSLATIONS[langKey]) {
+    TRANSLATIONS[langKey] = {};
   }
+  Object.assign(TRANSLATIONS[langKey], HOSTINGER_TRANSLATIONS[langKey]);
+});
+
+// Ensure all languages have English fallback
+Object.keys(HOSTINGER_TRANSLATIONS.en).forEach(key => {
+  Object.keys(TRANSLATIONS).forEach(lang => {
+    if (!TRANSLATIONS[lang][key]) {
+      TRANSLATIONS[lang][key] = HOSTINGER_TRANSLATIONS.en[key];
+    }
+  });
 });
