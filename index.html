@@ -35,18 +35,21 @@
     .store-header-logo { font-size: 6rem; }
     .store-header-info h1 { font-size: 2.5rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
     .store-header-info p { color: #666; font-size: 1.1rem; }
-    .coupon-item { background: #fff; border: 1px solid #e9e6f9; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; transition: all 0.3s; position: relative; }
-    .coupon-item:hover { box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
-    .coupon-item-header { display: flex; align-items: flex-start; gap: 2rem; margin-bottom: 1.5rem; }
-    .coupon-discount { background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; padding: 1.5rem; border-radius: 12px; text-align: center; min-width: 120px; font-weight: 900; font-size: 1.8rem; }
-    .coupon-info { flex: 1; }
-    .coupon-title { font-size: 1.4rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
-    .coupon-desc { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem; }
-    .coupon-buttons { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-    .coupon-btn { background: var(--primary); color: #fff; border: none; padding: 0.9rem 2rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-    .coupon-btn:hover { background: var(--secondary); }
-    .coupon-btn.secondary { background: #f5f5f5; color: #333; }
-    .coupon-btn.secondary:hover { background: #e0e0e0; }
+    .coupon-item { background: #fff; border: 2px solid #e9e6f9; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; transition: all 0.3s; display: flex; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .coupon-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
+    .coupon-left { background: linear-gradient(135deg, #1a7a7a, #0f5a5a); color: white; padding: 2rem; text-align: center; min-width: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+    .coupon-left::after { content: ''; position: absolute; top: 0; bottom: 0; right: -10px; width: 25px; background: repeating-linear-gradient(90deg, #f5f5f5 0, #f5f5f5 2px, transparent 2px, transparent 10px); border-radius: 50%; }
+    .coupon-discount-text { font-size: 0.8rem; opacity: 0.9; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+    .coupon-discount { font-size: 3rem; font-weight: 900; line-height: 1; }
+    .coupon-divider { width: 2px; height: 100%; background: repeating-linear-gradient(0deg, #ddd 0, #ddd 10px, transparent 10px, transparent 20px); margin: 0 1.5rem; }
+    .coupon-middle { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .coupon-title { font-size: 1.2rem; font-weight: 900; color: #111; margin-bottom: 1rem; }
+    .coupon-desc { color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; }
+    .coupon-desc li { margin-bottom: 0.5rem; }
+    .coupon-right { background: #f9f9f9; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 140px; border-left: 1px solid #e9e6f9; }
+    .coupon-logo { font-size: 3rem; margin-bottom: 1rem; }
+    .coupon-btn { background: #1a7a7a; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; text-align: center; }
+    .coupon-btn:hover { background: #0f5a5a; }
     .social-share { display: flex; gap: 0.8rem; margin-top: 1rem; }
     .social-link { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #f5f5f5; color: #555; text-decoration: none; transition: 0.2s; font-size: 1rem; }
     .social-link:hover { background: var(--primary); color: #fff; }
@@ -194,24 +197,30 @@ function render() {
       const shareText = store.name + ' - ' + c.title + ': ' + c.code;
       html += `
         <div class="coupon-item">
-          <div class="coupon-item-header">
+          <div class="coupon-left">
+            <div class="coupon-discount-text">UPTO</div>
             <div class="coupon-discount">${c.disc}</div>
-            <div class="coupon-info">
-              <h3 class="coupon-title">${c.title}</h3>
-              <p class="coupon-desc">${c.desc}</p>
-              <div class="coupon-buttons">
-                <button class="coupon-btn" onclick="openModal('${c.code}')">Get Coupon</button>
-                <button class="coupon-btn secondary" onclick="window.open('${c.link}', '_blank')">Visit Store</button>
-              </div>
-              <div class="social-share">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Reddit"><i class="fab fa-reddit"></i></a>
-                <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + window.location.href)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
-              </div>
+          </div>
+          <div class="coupon-divider"></div>
+          <div class="coupon-middle">
+            <h3 class="coupon-title">${c.title}</h3>
+            <ul class="coupon-desc" style="list-style: none; padding: 0;">
+              <li>✓ ${c.desc}</li>
+              <li>✓ Use coupon code: <strong>${c.code}</strong></li>
+              <li>✓ Valid until latest deals</li>
+            </ul>
+            <div class="social-share" style="margin-top: 1rem; border-top: 1px solid #e9e6f9; padding-top: 1rem;">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Reddit"><i class="fab fa-reddit"></i></a>
+              <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + window.location.href)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
             </div>
+          </div>
+          <div class="coupon-right">
+            <div class="coupon-logo">${store.emoji}</div>
+            <button class="coupon-btn" onclick="openModal('${c.code}')">Activate Deal</button>
           </div>
         </div>
       `;
