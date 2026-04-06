@@ -447,12 +447,19 @@ function searchStores(query) {
     return;
   }
   
+  // Search individual coupons, not stores
   let results = [];
   for (let category in STORES) {
-    STORES[category].forEach(s => {
-      if (s.name.toLowerCase().includes(q) || s.coupons.some(c => c.title.toLowerCase().includes(q))) {
-        results.push(s);
-      }
+    STORES[category].forEach(store => {
+      store.coupons.forEach(coupon => {
+        if (coupon.title.toLowerCase().includes(q) || coupon.code.toLowerCase().includes(q) || (coupon.desc[lang] || coupon.desc['en']).toLowerCase().includes(q)) {
+          results.push({
+            storeId: store.id,
+            storeName: store.emoji + ' ' + store.name,
+            ...coupon
+          });
+        }
+      });
     });
   }
   
@@ -465,11 +472,13 @@ function searchStores(query) {
   detailSection.style.display = 'none';
   viewTitle.textContent = results.length + ' ' + t('offers') + ' found';
   
-  grid.innerHTML = results.map(s => `
-    <div class="store-card" onclick="selectStore(${s.id})">
-      <div class="store-logo">${s.emoji}</div>
-      <div class="store-name">${s.name}</div>
-      <div class="store-count">${s.coupons.length} ${t('offers')}</div>
+  // Display individual coupons as cards
+  grid.innerHTML = results.map(coupon => `
+    <div class="store-card" onclick="openModal('${coupon.code}')" style="cursor: pointer; border: 2px solid #f6546a;">
+      <div class="store-logo" style="font-size: 2rem;">${coupon.disc}</div>
+      <div class="store-name" style="color: #f6546a;">${coupon.title}</div>
+      <div class="store-count">${coupon.storeName}</div>
+      <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">Code: ${coupon.code}</div>
     </div>
   `).join('');
 }
@@ -480,6 +489,7 @@ function openModal(code) {
   document.getElementById('couponReveal').classList.remove('show');
   document.getElementById('emailInput').value = '';
   document.getElementById('emailModal').classList.add('active');
+  document.getElementById('emailModal').scrollIntoView({behavior: 'smooth'});
 }
 
 function handleEmailSubmit(e) {
