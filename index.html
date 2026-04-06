@@ -362,6 +362,7 @@ function restoreState() {
 
 function backToCategories() {
   store = null;
+  document.getElementById('searchInput').value = '';
   render();
 }
 
@@ -478,7 +479,6 @@ function searchStores(query) {
       <div class="store-logo" style="font-size: 2rem;">${coupon.disc}</div>
       <div class="store-name" style="color: #f6546a;">${coupon.title}</div>
       <div class="store-count">${coupon.storeName}</div>
-      <div style="font-size: 0.8rem; color: #999; margin-top: 0.5rem;">Code: ${coupon.code}</div>
     </div>
   `).join('');
 }
