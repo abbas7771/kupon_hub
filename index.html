@@ -3,79 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Exclusive Hostinger coupons and web hosting discounts. Save up to 20% on web hosting, VPS, email, and cloud solutions at KuponHub.">
-  <meta name="keywords" content="Hostinger coupon, web hosting discount, VPS hosting, email hosting, website builder">
+  <meta name="description" content="KuponHub - Exclusive coupons and discounts. VidIQ 50% OFF, ElevenLabs 20% OFF, Hostinger Web Hosting 20% OFF. Get codes via email.">
+  <meta name="keywords" content="coupons, discounts, deals, VidIQ, ElevenLabs, Hostinger, affiliate">
   <title>KuponHub - Deals & Coupons</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    :root { --primary: #003366; --secondary: #f6546a; --dark: #008080; --accent: #fff68f; --light-bg: #fff68f; }
+    :root { --primary: #003366; --secondary: #f6546a; --dark: #008080; --accent: #fff68f; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff68f; }
-    .navbar { background: #003366; border-bottom: 1px solid #008080; padding: 1rem 0; }
-    .navbar-brand { font-size: 1.8rem; font-weight: 900; color: #FFFFFF; cursor: pointer; }
-    .nav-right { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
-    .lang-selector { background: #FFFFFF; border: 1px solid #003366; color: #003366; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
-    .hero { padding: 2rem 0; background: linear-gradient(135deg, #003366, #008080); color: white; }
-    .hero h1 { font-size: 2.2rem; font-weight: 900; color: #FFFFFF; }
-    .hero p { color: #E5E7EB; }
-    .search-box { display: flex; gap: 0.5rem; max-width: 600px; }
-    .search-box input { flex: 1; padding: 0.9rem 1.2rem; border: 1px solid #ddd; border-radius: 8px; }
-    .search-box button { background: #f6546a; color: white; border: none; padding: 0.9rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; }
-    .categories { padding: 1.5rem 0; border-bottom: 1px solid #f0f0f0; }
-    .cat-list { display: flex; gap: 1.5rem; overflow-x: auto; }
-    .cat-item { cursor: pointer; color: #666; text-decoration: none; font-weight: 500; white-space: nowrap; }
-    .cat-item.active { color: #003366; border-bottom: 3px solid #003366; }
-    .store-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-    .store-card { background: #fff; border-radius: 12px; border: 1px solid #e9e6f9; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; }
-    .store-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0, 51, 102, 0.15); }
-    .store-logo { font-size: 3rem; margin-bottom: 1rem; }
-    .store-name { font-size: 1.1rem; font-weight: 800; color: #111; margin-bottom: 0.5rem; }
-    .store-count { font-size: 0.85rem; color: #999; }
-    .store-header { background: linear-gradient(135deg, #fff68f, #e0e0e0); padding: 3rem 0; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem; }
+    
+    /* Navbar */
+    .navbar { background: linear-gradient(135deg, #003366, #008080); border-bottom: 2px solid #f6546a; padding: 1rem 0; }
+    .navbar-brand { font-size: 1.8rem; font-weight: 900; color: #fff; cursor: pointer; }
+    .nav-right { display: flex; gap: 1.5rem; align-items: center; margin-left: auto; }
+    .lang-selector { background: #fff; border: none; color: #003366; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    
+    /* Hero Section */
+    .hero { padding: 3rem 0; background: linear-gradient(135deg, #003366, #008080); color: white; }
+    .hero h1 { font-size: 2.2rem; font-weight: 900; margin-bottom: 1rem; }
+    .hero p { font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.95; }
+    
+    /* Categories */
+    .categories { padding: 1.5rem 0; background: white; border-bottom: 1px solid #e9e6f9; }
+    .cat-list { display: flex; gap: 1.5rem; overflow-x: auto; flex-wrap: wrap; }
+    .cat-item { cursor: pointer; padding: 0.8rem 1.2rem; background: #f5f5f5; border: 2px solid transparent; border-radius: 8px; font-weight: 600; color: #666; transition: 0.2s; }
+    .cat-item:hover { background: #fff68f; }
+    .cat-item.active { background: #003366; color: white; border-color: #f6546a; }
+    
+    /* Store Grid */
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+    .store-card { background: white; border: 2px solid #e9e6f9; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; cursor: pointer; transition: all 0.3s; }
+    .store-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0, 51, 102, 0.2); border-color: #f6546a; }
+    .store-logo { font-size: 4rem; margin-bottom: 1rem; }
+    .store-name { font-size: 1.2rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
+    .store-count { font-size: 0.9rem; color: #f6546a; font-weight: 600; }
+    
+    /* Store Detail Header */
+    .store-header { background: linear-gradient(135deg, #fff68f, #e0e0e0); padding: 3rem 2rem; margin-bottom: 2rem; border-bottom: 2px solid #008080; }
     .store-header-content { display: flex; align-items: center; gap: 3rem; }
-    .store-header-logo { font-size: 6rem; }
-    .store-header-info h1 { font-size: 2.5rem; font-weight: 900; color: #111; margin-bottom: 0.5rem; }
-    .store-header-info p { color: #666; font-size: 1.1rem; }
-    .coupon-item { background: #fff; border: 2px solid #e9e6f9; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; transition: all 0.3s; display: flex; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .coupon-item:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 51, 102, 0.15); }
-    .coupon-left { background: linear-gradient(135deg, #003366, #008080); color: white; padding: 2rem; text-align: center; min-width: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
-    .coupon-left::after { content: ''; position: absolute; top: 0; bottom: 0; right: -10px; width: 25px; background: repeating-linear-gradient(90deg, #f5f5f5 0, #f5f5f5 2px, transparent 2px, transparent 10px); border-radius: 50%; }
-    .coupon-discount-text { font-size: 0.8rem; opacity: 0.9; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
-    .coupon-discount { font-size: 3rem; font-weight: 900; line-height: 1; }
-    .coupon-divider { width: 2px; height: 100%; background: repeating-linear-gradient(0deg, #ddd 0, #ddd 10px, transparent 10px, transparent 20px); margin: 0 1.5rem; }
-    .coupon-middle { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; }
-    .coupon-title { font-size: 1.2rem; font-weight: 900; color: #111; margin-bottom: 1rem; }
-    .coupon-desc { color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; }
+    .store-header-logo { font-size: 6rem; min-width: 100px; }
+    .store-header-info h1 { font-size: 2.5rem; font-weight: 900; color: #111; margin: 0; }
+    .store-header-info p { color: #666; font-size: 1.1rem; margin: 0.5rem 0 0 0; }
+    
+    /* Coupon Item */
+    .coupon-item { background: white; border: 2px solid #e9e6f9; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: 0.3s; }
+    .coupon-item:hover { box-shadow: 0 8px 24px rgba(0, 51, 102, 0.15); }
+    .coupon-left { background: linear-gradient(135deg, #003366, #008080); color: white; padding: 2rem 1.5rem; border-radius: 8px; text-align: center; min-width: 140px; flex-shrink: 0; }
+    .coupon-discount-text { font-size: 0.75rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .coupon-discount { font-size: 2.5rem; font-weight: 900; line-height: 1; }
+    .coupon-middle { flex: 1; }
+    .coupon-title { font-size: 1.2rem; font-weight: 900; color: #111; margin: 0 0 1rem 0; }
+    .coupon-desc { list-style: none; padding: 0; margin: 0 0 1rem 0; color: #666; font-size: 0.95rem; }
     .coupon-desc li { margin-bottom: 0.5rem; }
-    .coupon-right { background: #f9f9f9; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 140px; border-left: 1px solid #e9e6f9; }
-    .coupon-logo { font-size: 3rem; margin-bottom: 1rem; }
-    .coupon-btn { background: #f6546a; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: 700; cursor: pointer; transition: 0.2s; width: 100%; text-align: center; }
+    .coupon-right { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .coupon-logo { font-size: 3rem; }
+    .coupon-btn { background: #f6546a; color: white; border: none; padding: 0.9rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.2s; }
     .coupon-btn:hover { background: #008080; }
+    
+    /* Social Share */
     .social-share { display: flex; gap: 0.8rem; margin-top: 1rem; border-top: 1px solid #e9e6f9; padding-top: 1rem; flex-wrap: wrap; }
-    .social-link { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #f5f5f5; color: #555; text-decoration: none; transition: 0.2s; font-size: 1rem; }
-    .social-link:hover { background: #003366; color: #fff; }
-    .back-btn { background: #f5f5f5; border: none; padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 2rem; display: none; }
+    .social-link { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #f5f5f5; color: #555; text-decoration: none; transition: 0.2s; }
+    .social-link:hover { background: #003366; color: white; }
+    
+    /* Modal */
+    .email-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999; justify-content: center; align-items: center; }
+    .email-modal.active { display: flex; }
+    .modal-content { background: white; border-radius: 16px; padding: 2.5rem; max-width: 450px; width: 90%; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); }
+    .modal-content h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem; color: #111; }
+    .modal-content p { color: #666; margin-bottom: 1.5rem; }
+    .email-input { width: 100%; padding: 0.9rem 1.2rem; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 1rem; font-size: 1rem; }
+    .email-input:focus { outline: none; border-color: #003366; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1); }
+    .submit-btn { width: 100%; background: #003366; color: white; border: none; padding: 0.9rem; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; }
+    .submit-btn:hover { background: #008080; }
+    .coupon-reveal { background: #fff68f; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; display: none; }
+    .coupon-reveal.show { display: block; }
+    .coupon-reveal code { display: block; background: white; padding: 1rem; border: 3px dashed #003366; border-radius: 6px; font-size: 1.3rem; font-weight: 700; color: #003366; text-align: center; margin-bottom: 1rem; }
+    
+    /* Sections */
+    .section { padding: 2rem 0; }
+    .section-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 1.5rem; color: #111; }
+    .back-btn { background: #f5f5f5; border: none; padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 1.5rem; display: none; }
     .back-btn.show { display: inline-block; }
     .back-btn:hover { background: #e0e0e0; }
-    .section-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 1.5rem; }
-    .email-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; }
-    .email-modal.active { display: flex; }
-    .modal-content { background: #fff; border-radius: 16px; padding: 2rem; max-width: 500px; width: 90%; }
-    .email-input { padding: 0.9rem 1.2rem; border: 1px solid #ddd; border-radius: 8px; width: 100%; margin-bottom: 1rem; }
-    .submit-btn { background: #003366; color: #fff; border: none; padding: 0.9rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; }
-    .coupon-reveal { background: #fff68f; padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
-    .coupon-reveal.show { display: block; }
-    .coupon-reveal code { display: block; background: #fff; padding: 1rem; border: 2px dashed #003366; border-radius: 6px; font-size: 1.1rem; font-weight: 700; color: #003366; text-align: center; }
-    footer { background: #f5f5f5; padding: 2rem 0; text-align: center; margin-top: 3rem; }
-    @media (max-width: 768px) { .store-header-content { flex-direction: column; text-align: center; } .coupon-item { flex-direction: column; } .coupon-divider { display: none; } }
+    
+    /* Footer */
+    footer { background: #003366; color: white; padding: 2rem 0; text-align: center; margin-top: 3rem; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .store-header-content { flex-direction: column; text-align: center; }
+      .store-header-logo { font-size: 4rem; }
+      .coupon-item { flex-direction: column; }
+      .store-header-logo { min-width: auto; }
+    }
   </style>
 </head>
 <body>
 
+<!-- Navbar -->
 <nav class="navbar">
   <div class="container-fluid px-3 px-md-5">
-    <span class="navbar-brand" onclick="backToHome()">🎟️ KuponHub</span>
+    <span class="navbar-brand" onclick="backToHome()" style="cursor: pointer;">🎟️ KuponHub</span>
     <div class="nav-right">
       <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
         <option value="en">EN</option>
@@ -88,183 +117,199 @@
   </div>
 </nav>
 
-<section class="hero" id="heroSection">
+<!-- Hero -->
+<section class="hero">
   <div class="container-fluid px-3 px-md-5">
     <h1 id="heroTitle">Featured daily deals and coupons</h1>
     <p id="heroSubtitle">Get cashback and extra savings on your favorite brands</p>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search stores...">
-      <button onclick="doSearch()">Search</button>
-    </div>
   </div>
 </section>
 
-<section class="categories" id="categoriesSection">
+<!-- Categories -->
+<section class="categories">
   <div class="container-fluid px-3 px-md-5">
-    <div class="cat-list">
-      <a class="cat-item active" onclick="filterCategory('all')">All</a>
-      <a class="cat-item" onclick="filterCategory('shopping')">Shopping</a>
-      <a class="cat-item" onclick="filterCategory('travel')">Travel</a>
-      <a class="cat-item" onclick="filterCategory('tech')">Tech</a>
-      <a class="cat-item" onclick="filterCategory('vpn')">VPN</a>
-      <a class="cat-item" onclick="filterCategory('fashion')">Fashion</a>
-      <a class="cat-item" onclick="filterCategory('hosting')">Hosting</a>
-    </div>
+    <div class="cat-list" id="catList"></div>
   </div>
 </section>
 
-<section id="mainSection" style="padding: 2rem 0;">
+<!-- Main Store Grid -->
+<section class="section" id="mainSection">
   <div class="container-fluid px-3 px-md-5">
     <button class="back-btn" id="backBtn" onclick="backToCategories()">← Back</button>
-    <h2 class="section-title" id="viewTitle"></h2>
+    <h2 class="section-title" id="viewTitle">All</h2>
     <div id="storeGrid" class="store-grid"></div>
   </div>
 </section>
 
-<section id="storeDetailSection" style="display: none;">
-  <div class="container-fluid" style="padding: 0;">
+<!-- Store Detail -->
+<section class="section" id="storeDetailSection" style="display: none;">
+  <div style="background: linear-gradient(135deg, #fff68f, #e0e0e0); padding: 3rem 0; margin: -2rem 0 2rem 0;">
     <div class="container-fluid px-3 px-md-5">
-      <button class="back-btn show" id="backBtn2" onclick="backToCategories()">← Back</button>
-    </div>
-    <div class="store-header" id="storeHeader" style="background: linear-gradient(135deg, #fff68f, #e0e0e0); padding: 2rem; margin-bottom: 2rem;">
-      <div class="container-fluid px-3 px-md-5">
-        <div class="store-header-content" style="display: flex; align-items: center; gap: 2rem;">
-          <div class="store-header-logo" id="storeDetailLogo" style="font-size: 5rem; min-width: 100px;"></div>
-          <div class="store-header-info" style="flex: 1;">
-            <h1 id="storeDetailName" style="font-size: 2.5rem; font-weight: 900; color: #111; margin-bottom: 0.5rem;"></h1>
-            <p id="storeDetailDesc" style="color: #666; font-size: 1.1rem; margin: 0;"></p>
-          </div>
+      <button class="back-btn show" onclick="backToCategories()">← Back</button>
+      <div class="store-header-content" style="display: flex; align-items: center; gap: 3rem;">
+        <div class="store-header-logo" id="storeDetailLogo" style="font-size: 5rem; min-width: 100px;"></div>
+        <div>
+          <h1 id="storeDetailName" style="font-size: 2.5rem; font-weight: 900; margin: 0 0 0.5rem 0;"></h1>
+          <p id="storeDetailDesc" style="color: #666; font-size: 1.1rem; margin: 0;"></p>
         </div>
       </div>
     </div>
-    <div class="container-fluid px-3 px-md-5">
-      <div id="couponsListContainer"></div>
-    </div>
+  </div>
+  <div class="container-fluid px-3 px-md-5">
+    <div id="couponsListContainer"></div>
   </div>
 </section>
 
+<!-- Email Modal -->
 <div id="emailModal" class="email-modal">
   <div class="modal-content">
-    <h2 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem;" id="modalTitle">Unlock Coupon</h2>
-    <p style="color: #666; margin-bottom: 1.5rem;" id="modalSubtitle">Subscribe to get the code</p>
-    <form id="emailForm" onsubmit="handleEmailSubmit(event)" style="display: none;">
+    <h2 id="modalTitle">Unlock Coupon</h2>
+    <p id="modalSubtitle">Subscribe to get the code</p>
+    <form id="emailForm" onsubmit="handleEmailSubmit(event)">
       <input type="email" class="email-input" id="emailInput" placeholder="Your email..." required>
       <button type="submit" class="submit-btn">Get Code</button>
     </form>
     <div id="couponReveal" class="coupon-reveal">
-      <p style="color: #666; font-size: 0.85rem; margin-bottom: 0.5rem;" id="yourCodeLabel">Your code:</p>
+      <p style="color: #666; margin-bottom: 0.5rem;">Your code:</p>
       <code id="couponCode"></code>
-      <button onclick="copyCoupon()" class="coupon-btn">Copy</button>
+      <button onclick="copyCoupon()" class="coupon-btn" style="width: 100%;">Copy</button>
     </div>
   </div>
 </div>
 
+<!-- Footer -->
 <footer id="footer">© 2026 KuponHub</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// ============================================
+// DATA & STATE
+// ============================================
+
 const TRANSLATIONS = {
-  en: { featured: 'Featured daily deals and coupons', cashback: 'Get cashback and extra savings on your favorite brands', search: 'Search stores...', all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting', back: '← Back', offers: 'offers', exclusive: 'Exclusive deals and coupons for', getCoupon: 'Get Coupon', unlockCoupon: 'Unlock Coupon', subscribe: 'Subscribe to get the code', yourCode: 'Your code:', copy: 'Copy', copyright: '© 2026 KuponHub', vidiq_desc: 'Get 50% off YouTube analytics tools. Perfect for content creators looking to optimize their channel performance.', elevenlabs_desc: 'Enjoy 20% discount on premium AI text-to-speech services. Create natural-sounding voices for your projects.', hostinger_desc: 'Save 20% on all Hostinger hosting packages. Fast, reliable hosting with 24/7 support included.' },
-  tr: { featured: 'Günlük fırsatlar ve kuponlar', cashback: 'Favori markalarda geri ödeme ve ekstra tasarruf alın', search: 'Mağazaları ara...', all: 'Tümü', shopping: 'Alışveriş', travel: 'Seyahat', tech: 'Teknoloji', vpn: 'VPN', fashion: 'Moda', hosting: 'Hosting', back: '← Geri', offers: 'teklif', exclusive: 'Özel fırsatlar ve kuponlar', getCoupon: 'Kuponu Al', unlockCoupon: 'Kuponu Açın', subscribe: 'Kodu almak için abone olun', yourCode: 'Sizin kodunuz:', copy: 'Kopyala', copyright: '© 2026 KuponHub', vidiq_desc: 'YouTube analitik araçlarında %50 indirim alın. Kanal performansınızı optimize etmek isteyen içerik oluşturucular için mükemmeldir.', elevenlabs_desc: 'Premium AI metin-konuşma hizmetlerinde %20 indirim. Projeleriniz için doğal ses oluşturun.', hostinger_desc: 'Tüm Hostinger hosting paketlerinde %20 tasarruf yapın. Hızlı, güvenilir hosting ve 24/7 destek dahil.' },
-  ru: { featured: 'Ежедневные предложения и купоны', cashback: 'Получите кэшбэк и дополнительную экономию на ваши любимые бренды', search: 'Поиск магазинов...', all: 'Все', shopping: 'Покупки', travel: 'Путешествия', tech: 'Технология', vpn: 'VPN', fashion: 'Мода', hosting: 'Хостинг', back: '← Назад', offers: 'предложения', exclusive: 'Эксклюзивные предложения и купоны', getCoupon: 'Получить купон', unlockCoupon: 'Разблокировать купон', subscribe: 'Подпишитесь, чтобы получить код', yourCode: 'Ваш код:', copy: 'Копировать', copyright: '© 2026 KuponHub', vidiq_desc: 'Получите 50% скидку на инструменты YouTube Analytics. Идеально для создателей контента, которые хотят оптимизировать производительность своего канала.', elevenlabs_desc: 'Получите 20% скидку на услуги преобразования текста в речь с искусственным интеллектом. Создавайте естественные голоса для своих проектов.', hostinger_desc: 'Сэкономьте 20% на всех пакетах хостинга Hostinger. Быстрый, надежный хостинг с поддержкой 24/7.' },
-  zh: { featured: '每日特惠和优惠券', cashback: '在您最喜欢的品牌上获得现金返还和额外节省', search: '搜索商店...', all: '全部', shopping: '购物', travel: '旅行', tech: '科技', vpn: 'VPN', fashion: '时尚', hosting: '托管', back: '← 返回', offers: '优惠', exclusive: '独家优惠和优惠券', getCoupon: '获取优惠券', unlockCoupon: '解锁优惠券', subscribe: '订阅以获取代码', yourCode: '您的代码:', copy: '复制', copyright: '© 2026 KuponHub', vidiq_desc: '获得YouTube分析工具50%的折扣。非常适合希望优化频道性能的内容创作者。', elevenlabs_desc: '享受高级AI文本转语音服务20%的折扣。为您的项目创建自然发音的声音。', hostinger_desc: '在所有Hostinger托管套餐上节省20%。快速、可靠的托管，包括24/7支持。' },
-  es: { featured: 'Ofertas y cupones diarios destacados', cashback: 'Obtenga reembolso y ahorros adicionales en sus marcas favoritas', search: 'Buscar tiendas...', all: 'Todos', shopping: 'Compras', travel: 'Viajes', tech: 'Tecnología', vpn: 'VPN', fashion: 'Moda', hosting: 'Alojamiento', back: '← Volver', offers: 'ofertas', exclusive: 'Ofertas y cupones exclusivos para', getCoupon: 'Obtener Cupón', unlockCoupon: 'Desbloquear Cupón', subscribe: 'Suscríbete para obtener el código', yourCode: 'Tu código:', copy: 'Copiar', copyright: '© 2026 KuponHub', vidiq_desc: 'Obtenga 50% de descuento en herramientas de análisis de YouTube. Perfecto para creadores de contenido que desean optimizar el rendimiento de su canal.', elevenlabs_desc: 'Disfrute de 20% de descuento en servicios premium de síntesis de voz con IA. Cree voces naturales para sus proyectos.', hostinger_desc: 'Ahorre 20% en todos los paquetes de hosting de Hostinger. Hosting rápido y confiable con soporte 24/7 incluido.' }
+  en: { featured: 'Featured daily deals and coupons', cashback: 'Get cashback and extra savings on your favorite brands', all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting', offers: 'offers', exclusive: 'Exclusive deals and coupons for', getCoupon: 'Get Coupon', unlockCoupon: 'Unlock Coupon', subscribe: 'Subscribe to get the code', yourCode: 'Your code:', copy: 'Copy', copyright: '© 2026 KuponHub' },
+  tr: { featured: 'Günlük fırsatlar ve kuponlar', cashback: 'Favori markalarda geri ödeme ve ekstra tasarruf alın', all: 'Tümü', shopping: 'Alışveriş', travel: 'Seyahat', tech: 'Teknoloji', vpn: 'VPN', fashion: 'Moda', hosting: 'Hosting', offers: 'teklif', exclusive: 'Özel fırsatlar ve kuponlar', getCoupon: 'Kuponu Al', unlockCoupon: 'Kuponu Açın', subscribe: 'Kodu almak için abone olun', yourCode: 'Sizin kodunuz:', copy: 'Kopyala', copyright: '© 2026 KuponHub' },
+  ru: { featured: 'Ежедневные предложения и купоны', cashback: 'Получите кэшбэк и дополнительную экономию на ваши любимые бренды', all: 'Все', shopping: 'Покупки', travel: 'Путешествия', tech: 'Технология', vpn: 'VPN', fashion: 'Мода', hosting: 'Хостинг', offers: 'предложения', exclusive: 'Эксклюзивные предложения и купоны', getCoupon: 'Получить купон', unlockCoupon: 'Разблокировать купон', subscribe: 'Подпишитесь, чтобы получить код', yourCode: 'Ваш код:', copy: 'Копировать', copyright: '© 2026 KuponHub' },
+  zh: { featured: '每日特惠和优惠券', cashback: '在您最喜欢的品牌上获得现金返还和额外节省', all: '全部', shopping: '购物', travel: '旅行', tech: '科技', vpn: 'VPN', fashion: '时尚', hosting: '托管', offers: '优惠', exclusive: '独家优惠和优惠券', getCoupon: '获取优惠券', unlockCoupon: '解锁优惠券', subscribe: '订阅以获取代码', yourCode: '您的代码:', copy: '复制', copyright: '© 2026 KuponHub' },
+  es: { featured: 'Ofertas y cupones diarios destacados', cashback: 'Obtenga reembolso y ahorros adicionales en sus marcas favoritas', all: 'Todos', shopping: 'Compras', travel: 'Viajes', tech: 'Tecnología', vpn: 'VPN', fashion: 'Moda', hosting: 'Alojamiento', offers: 'ofertas', exclusive: 'Ofertas y cupones exclusivos para', getCoupon: 'Obtener Cupón', unlockCoupon: 'Desbloquear Cupón', subscribe: 'Suscríbete para obtener el código', yourCode: 'Tu código:', copy: 'Copiar', copyright: '© 2026 KuponHub' }
 };
 
 const STORES = {
   all: [
-    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', descKey: 'vidiq_desc', link: 'https://vidiq.com/kuponhub', partner: true}]},
-    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', descKey: 'elevenlabs_desc', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]},
-    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting Plans', descKey: 'hostinger_desc', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{ code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: { en: '50% off YouTube analytics tools', tr: 'YouTube analitik araçlarında %50 indirim' } }] },
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{ code: 'EL20', disc: '20%', title: 'AI Voice Generation', desc: { en: '20% off AI text-to-speech', tr: 'AI metin-konuşmada %20 indirim' } }] },
+    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{ code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting', desc: { en: '20% off web hosting', tr: 'Web hosting-de %20 indirim' } }] }
   ],
-  shopping: [{id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', price: '50% OFF', descKey: 'vidiq_desc', link: 'https://vidiq.com/kuponhub', partner: true}]}],
+  shopping: [
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{ code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: { en: '50% off YouTube analytics tools', tr: 'YouTube analitik araçlarında %50 indirim' } }] }
+  ],
   travel: [],
   tech: [
-    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', descKey: 'vidiq_desc', link: 'https://vidiq.com/kuponhub', partner: true}]},
-    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', descKey: 'elevenlabs_desc', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]}
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{ code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: { en: '50% off YouTube analytics tools', tr: 'YouTube analitik araçlarında %50 indirim' } }] },
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{ code: 'EL20', disc: '20%', title: 'AI Voice Generation', desc: { en: '20% off AI text-to-speech', tr: 'AI metin-konuşmada %20 indirim' } }] }
   ],
   vpn: [],
   fashion: [],
   hosting: [
     { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [
-      {id: 1, code: 'PREMIUM20', disc: '20%', title: 'Premium Web Hosting', price: '$3.99/ay → $3.19/ay', descKey: 'premium20_package', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d605f-c0b8-718e-843b-5c0e7eda991c', partner: true},
-      {id: 2, code: 'BUSINESS20', disc: '20%', title: 'Business Web Hosting', price: '$4.99/ay → $3.99/ay', descKey: 'business20_package', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_business&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d605f-f19f-72bf-accc-41aa0adaca02', partner: true},
-      {id: 3, code: 'CLOUD20', disc: '20%', title: 'Cloud Startup', price: '$9.99/ay → $7.99/ay', descKey: 'cloud20_package', link: 'https://www.hostinger.com/cart?product=hosting%3Acloud_economy&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d6060-3804-71da-8fc7-50f1ed5b6f76', partner: true}
-    ]}
+      { code: 'PREMIUM20', disc: '20%', title: 'Premium Web Hosting', desc: { en: '3 websites, 25k visitors/mo', tr: '3 sayt, 25.000 ziyarətçi/ay' } },
+      { code: 'BUSINESS20', disc: '20%', title: 'Business Web Hosting', desc: { en: '50 websites, 100k visitors/mo', tr: '50 sayt, 100.000 ziyarətçi/ay' } },
+      { code: 'CLOUD20', disc: '20%', title: 'Cloud Startup', desc: { en: '100 websites, 200k visitors/mo', tr: '100 sayt, 200.000 ziyarətçi/ay' } }
+    ] }
   ]
 };
 
-let lang = localStorage.getItem('lang') || 'en', cat = 'all', store = null, coupon = null;
+let lang = localStorage.getItem('lang') || 'en';
+let cat = 'all';
+let store = null;
+let coupon = null;
 
-function t(key) { 
-  if (!TRANSLATIONS[lang] || !TRANSLATIONS[lang][key]) {
-    return TRANSLATIONS['en'][key] || key;
-  }
-  return TRANSLATIONS[lang][key];
+// ============================================
+// UTILITY FUNCTIONS
+// ============================================
+
+function t(key) {
+  return (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) || (TRANSLATIONS['en'] && TRANSLATIONS['en'][key]) || key;
+}
+
+function initCategories() {
+  const catList = document.getElementById('catList');
+  const cats = ['all', 'shopping', 'travel', 'tech', 'vpn', 'fashion', 'hosting'];
+  catList.innerHTML = cats.map(c => `
+    <button class="cat-item ${c === cat ? 'active' : ''}" onclick="filterCategory('${c}')">${t(c)}</button>
+  `).join('');
 }
 
 function updateUI() {
   document.getElementById('heroTitle').textContent = t('featured');
   document.getElementById('heroSubtitle').textContent = t('cashback');
-  document.getElementById('searchInput').placeholder = t('search');
   document.getElementById('modalTitle').textContent = t('unlockCoupon');
   document.getElementById('modalSubtitle').textContent = t('subscribe');
-  document.getElementById('yourCodeLabel').textContent = t('yourCode');
   document.getElementById('footer').textContent = t('copyright');
-  document.getElementById('backBtn').textContent = t('back');
-  document.getElementById('backBtn2').textContent = t('back');
-  const catNames = {all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting'};
-  document.getElementById('viewTitle').textContent = catNames[cat] || cat;
+  document.getElementById('langSelect').value = lang;
+  initCategories();
 }
 
-function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); updateUI(); render(); }
-function filterCategory(c) { cat = c; store = null; document.querySelectorAll('.cat-item').forEach(e => e.classList.remove('active')); event.target.classList.add('active'); render(); }
-function backToHome() { store = null; cat = 'all'; render(); }
-function backToCategories() { store = null; render(); }
-function doSearch() {}
+function changeLanguage(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  updateUI();
+  render();
+}
+
+function filterCategory(c) {
+  cat = c;
+  store = null;
+  render();
+}
+
+function backToHome() {
+  store = null;
+  cat = 'all';
+  render();
+}
+
+function backToCategories() {
+  store = null;
+  render();
+}
 
 function render() {
-  const main = document.getElementById('mainSection');
-  const detail = document.getElementById('storeDetailSection');
+  const mainSection = document.getElementById('mainSection');
+  const detailSection = document.getElementById('storeDetailSection');
   const grid = document.getElementById('storeGrid');
+  const viewTitle = document.getElementById('viewTitle');
   
-  updateUI();
-  console.log('Rendering category:', cat, 'Stores:', STORES[cat]);
-
+  initCategories();
+  
   if (store) {
-    main.style.display = 'none';
-    detail.style.display = 'block';
+    mainSection.style.display = 'none';
+    detailSection.style.display = 'block';
     document.getElementById('storeDetailLogo').textContent = store.emoji;
     document.getElementById('storeDetailName').textContent = store.name;
     document.getElementById('storeDetailDesc').textContent = t('exclusive') + ' ' + store.name;
+    
     let html = '';
     store.coupons.forEach(c => {
-      const shareText = store.name + ' - ' + c.title + ': ' + c.code;
       html += `
         <div class="coupon-item">
           <div class="coupon-left">
             <div class="coupon-discount-text">UPTO</div>
             <div class="coupon-discount">${c.disc}</div>
           </div>
-          <div class="coupon-divider"></div>
           <div class="coupon-middle">
             <h3 class="coupon-title">${c.title}</h3>
-            <ul class="coupon-desc" style="list-style: none; padding: 0;">
-              <li>✓ ${c.price || 'Special offer'}</li>
-              <li>✓ ${(() => {
-                const descs = {premium20_package: {tr: '✓ 3 sayt ✓ 25.000 ziyarətçi/ay ✓ 20GB SSD ✓ Pulsuz SSL ✓ 20% endirim', en: '✓ 3 websites ✓ 25,000 visitors/month ✓ 20GB SSD ✓ Free SSL ✓ 20% discount'}, business20_package: {tr: '✓ 50 sayt ✓ 100.000 ziyarətçi/ay ✓ 50GB NVMe ✓ Email hesapları ✓ 20% endirim', en: '✓ 50 websites ✓ 100,000 visitors/month ✓ 50GB NVMe ✓ Email accounts ✓ 20% discount'}, cloud20_package: {tr: '✓ 100 sayt ✓ 200.000 ziyarətçi/ay ✓ 100GB NVMe ✓ 4GB RAM ✓ 20% endirim', en: '✓ 100 websites ✓ 200,000 visitors/month ✓ 100GB NVMe ✓ 4GB RAM ✓ 20% discount'}};
-                return (descs[c.descKey] && descs[c.descKey][lang]) ? descs[c.descKey][lang] : 'Get exclusive deal';
-              })()}</li>
+            <ul class="coupon-desc">
+              <li>✓ ${c.desc[lang] || c.desc['en']}</li>
               <li>✓ Get exclusive code via email</li>
-              <li>✓ Valid until latest deals</li>
+              <li>✓ Limited time offer</li>
             </ul>
             <div class="social-share">
               <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
-              <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
               <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              <a href="https://reddit.com/submit?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Reddit"><i class="fab fa-reddit"></i></a>
-              <a href="https://wa.me/?text=${encodeURIComponent(shareText + ' ' + window.location.href)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-              <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(shareText)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
+              <a href="https://wa.me/?text=${encodeURIComponent(store.name + ' - ' + c.title + ': ' + c.code)}" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              <a href="https://t.me/share/url?url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-link" title="Telegram"><i class="fab fa-telegram"></i></a>
             </div>
           </div>
           <div class="coupon-right">
@@ -276,9 +321,11 @@ function render() {
     });
     document.getElementById('couponsListContainer').innerHTML = html;
   } else {
-    main.style.display = 'block';
-    detail.style.display = 'none';
-    let stores = STORES[cat] || [];
+    mainSection.style.display = 'block';
+    detailSection.style.display = 'none';
+    viewTitle.textContent = t(cat);
+    
+    const stores = STORES[cat] || [];
     grid.innerHTML = stores.map(s => `
       <div class="store-card" onclick="selectStore(${s.id})">
         <div class="store-logo">${s.emoji}</div>
@@ -291,8 +338,11 @@ function render() {
 
 function selectStore(storeId) {
   for (let category in STORES) {
-    let found = STORES[category].find(s => s.id === storeId);
-    if (found) { store = found; break; }
+    const found = STORES[category].find(s => s.id === storeId);
+    if (found) {
+      store = found;
+      break;
+    }
   }
   render();
 }
@@ -312,7 +362,12 @@ function handleEmailSubmit(e) {
   fd.append('Timestamp', new Date());
   fd.append('Email', email);
   fd.append('Coupon', coupon);
-  fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWxUHsSaurWmbjlUEmLpWyFijcSUJPKjTKPzFjVV61p9c2pA/formResponse', { method: 'POST', body: fd, mode: 'no-cors' });
+  
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLSdWxUHsSaurWmbjlUEmLpWyFijcSUJPKjTKPzFjVV61p9c2pA/formResponse', {
+    method: 'POST',
+    body: fd,
+    mode: 'no-cors'
+  });
   
   setTimeout(() => {
     document.getElementById('emailForm').style.display = 'none';
@@ -321,23 +376,24 @@ function handleEmailSubmit(e) {
   }, 300);
 }
 
-function copyCoupon() { navigator.clipboard.writeText(coupon); }
-
-document.getElementById('emailModal').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('emailModal')) document.getElementById('emailModal').classList.remove('active');
-});
-
-// Load Hostinger data
-if (typeof HOSTINGER_COUPONS !== 'undefined' && HOSTINGER_COUPONS.length > 0) {
-  STORES.hosting[0].coupons = HOSTINGER_COUPONS.map(c => ({...c, partner: true}));
-  STORES.all = STORES.all.filter(s => s.name !== 'Hostinger');
-  STORES.all.push({id: 3, name: 'Hostinger', emoji: '🌐', coupons: HOSTINGER_COUPONS.map(c => ({...c, partner: true}))});
+function copyCoupon() {
+  navigator.clipboard.writeText(coupon);
 }
 
-document.getElementById('langSelect').value = lang;
-document.querySelectorAll('.cat-item')[0].classList.add('active'); // Activate 'All' button
-render();
-</script>
+document.getElementById('emailModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('emailModal')) {
+    document.getElementById('emailModal').classList.remove('active');
+  }
+});
 
+// ============================================
+// INITIALIZATION
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateUI();
+  render();
+});
+</script>
 </body>
 </html>
