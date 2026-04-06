@@ -7,6 +7,8 @@ if (typeof TRANSLATIONS === 'undefined') {
 }
 
 const HOSTINGER_PACKAGE_DESCRIPTIONS = {
+  // Note: Keys here become lowercase in TRANSLATIONS
+  // PREMIUM20 → premium20_package
   PREMIUM20: {
     tr: '✓ 3 sayt ✓ 25.000 ziyarətçi/ay ✓ 20GB SSD ✓ Pulsuz SSL ✓ 20% endirim',
     en: '✓ 3 websites ✓ 25,000 visitors/month ✓ 20GB SSD ✓ Free SSL ✓ 20% discount',
@@ -173,15 +175,19 @@ const HOSTINGER_PACKAGE_DESCRIPTIONS = {
 // Merge new descriptions into TRANSLATIONS directly
 Object.keys(HOSTINGER_PACKAGE_DESCRIPTIONS).forEach(code => {
   const descs = HOSTINGER_PACKAGE_DESCRIPTIONS[code];
-  const descKey = code.toLowerCase() + '_package';
+  const descKeyLower = code.toLowerCase() + '_package';
   
   Object.keys(descs).forEach(lang => {
     if (!TRANSLATIONS[lang]) {
       TRANSLATIONS[lang] = {};
     }
-    TRANSLATIONS[lang][descKey] = descs[lang];
+    // Add both keys to be safe
+    TRANSLATIONS[lang][descKeyLower] = descs[lang];  // premium20_package
+    TRANSLATIONS[lang][code.toLowerCase()] = descs[lang];  // premium20 (fallback)
   });
 });
+
+console.log('Loaded coupon translations:', Object.keys(TRANSLATIONS.en).filter(k => k.includes('premium')));
 
 // Also merge HOSTINGER_TRANSLATIONS if it exists
 if (typeof HOSTINGER_TRANSLATIONS !== 'undefined') {
