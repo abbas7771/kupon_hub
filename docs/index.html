@@ -77,7 +77,6 @@
     <div class="nav-right">
       <select class="lang-selector" id="langSelect" onchange="changeLanguage(this.value)">
         <option value="en">EN</option>
-        <option value="az">AZ</option>
         <option value="tr">TR</option>
         <option value="ru">RU</option>
         <option value="zh">ZH</option>
@@ -155,28 +154,37 @@
 <footer id="footer">© 2026 KuponHub</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="hostinger-data.js"></script>
+<script src="hostinger-translations.js"></script>
+<script>
+// Load Hostinger data
+if (typeof HOSTINGER_COUPONS !== 'undefined' && HOSTINGER_COUPONS.length > 0) {
+  STORES.hosting[0].coupons = HOSTINGER_COUPONS.map(c => ({...c, partner: true}));
+  STORES.all = STORES.all.filter(s => s.name !== 'Hostinger');
+  STORES.all.push({id: 3, name: 'Hostinger', emoji: '🌐', coupons: HOSTINGER_COUPONS.map(c => ({...c, partner: true}))});
+}
+</script>
 <script>
 const TRANSLATIONS = {
-  en: { featured: 'Featured daily deals and coupons', cashback: 'Get cashback and extra savings on your favorite brands', search: 'Search stores...', all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting', back: '← Back', offers: 'offers', exclusive: 'Exclusive deals and coupons for', getCoupon: 'Get Coupon', unlockCoupon: 'Unlock Coupon', subscribe: 'Subscribe to get the code', yourCode: 'Your code:', copy: 'Copy', copyright: '© 2026 KuponHub' },
-  az: { featured: 'Günlərik sövsələşmələr və kuponlar', cashback: 'Sevdiyiniz brendlərdə geri ödəniş və əlavə qənaət alın', search: 'Mağazaları axtar...', all: 'Hamısı', shopping: 'Alış-veriş', travel: 'Səyahət', tech: 'Texnologiya', vpn: 'VPN', fashion: 'Moda', hosting: 'Hosting', back: '← Geri', offers: 'təklif', exclusive: 'Xüsusi sövsələşmələr və kuponlar', getCoupon: 'Kuponu Al', unlockCoupon: 'Kuponu Açın', subscribe: 'Kodu almaq üçün abunə olun', yourCode: 'Sizin kodunuz:', copy: 'Kopyala', copyright: '© 2026 KuponHub' },
-  tr: { featured: 'Günlük fırsatlar ve kuponlar', cashback: 'Favori markalarda geri ödeme ve ekstra tasarruf alın', search: 'Mağazaları ara...', all: 'Tümü', shopping: 'Alışveriş', travel: 'Seyahat', tech: 'Teknoloji', vpn: 'VPN', fashion: 'Moda', hosting: 'Hosting', back: '← Geri', offers: 'teklif', exclusive: 'Özel fırsatlar ve kuponlar', getCoupon: 'Kuponu Al', unlockCoupon: 'Kuponu Açın', subscribe: 'Kodu almak için abone olun', yourCode: 'Sizin kodunuz:', copy: 'Kopyala', copyright: '© 2026 KuponHub' },
-  ru: { featured: 'Ежедневные предложения и купоны', cashback: 'Получите кэшбэк и дополнительную экономию на ваши любимые бренды', search: 'Поиск магазинов...', all: 'Все', shopping: 'Покупки', travel: 'Путешествия', tech: 'Технология', vpn: 'VPN', fashion: 'Мода', hosting: 'Хостинг', back: '← Назад', offers: 'предложения', exclusive: 'Эксклюзивные предложения и купоны', getCoupon: 'Получить купон', unlockCoupon: 'Разблокировать купон', subscribe: 'Подпишитесь, чтобы получить код', yourCode: 'Ваш код:', copy: 'Копировать', copyright: '© 2026 KuponHub' },
-  zh: { featured: '每日特惠和优惠券', cashback: '在您最喜欢的品牌上获得现金返还和额外节省', search: '搜索商店...', all: '全部', shopping: '购物', travel: '旅行', tech: '科技', vpn: 'VPN', fashion: '时尚', hosting: '托管', back: '← 返回', offers: '优惠', exclusive: '独家优惠和优惠券', getCoupon: '获取优惠券', unlockCoupon: '解锁优惠券', subscribe: '订阅以获取代码', yourCode: '您的代码:', copy: '复制', copyright: '© 2026 KuponHub' },
-  es: { featured: 'Ofertas y cupones diarios destacados', cashback: 'Obtenga reembolso y ahorros adicionales en sus marcas favoritas', search: 'Buscar tiendas...', all: 'Todos', shopping: 'Compras', travel: 'Viajes', tech: 'Tecnología', vpn: 'VPN', fashion: 'Moda', hosting: 'Alojamiento', back: '← Volver', offers: 'ofertas', exclusive: 'Ofertas y cupones exclusivos para', getCoupon: 'Obtener Cupón', unlockCoupon: 'Desbloquear Cupón', subscribe: 'Suscríbete para obtener el código', yourCode: 'Tu código:', copy: 'Copiar', copyright: '© 2026 KuponHub' }
+  en: { featured: 'Featured daily deals and coupons', cashback: 'Get cashback and extra savings on your favorite brands', search: 'Search stores...', all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting', back: '← Back', offers: 'offers', exclusive: 'Exclusive deals and coupons for', getCoupon: 'Get Coupon', unlockCoupon: 'Unlock Coupon', subscribe: 'Subscribe to get the code', yourCode: 'Your code:', copy: 'Copy', copyright: '© 2026 KuponHub', vidiq_desc: 'Get 50% off YouTube analytics tools. Perfect for content creators looking to optimize their channel performance.', elevenlabs_desc: 'Enjoy 20% discount on premium AI text-to-speech services. Create natural-sounding voices for your projects.', hostinger_desc: 'Save 20% on all Hostinger hosting packages. Fast, reliable hosting with 24/7 support included.' },
+  tr: { featured: 'Günlük fırsatlar ve kuponlar', cashback: 'Favori markalarda geri ödeme ve ekstra tasarruf alın', search: 'Mağazaları ara...', all: 'Tümü', shopping: 'Alışveriş', travel: 'Seyahat', tech: 'Teknoloji', vpn: 'VPN', fashion: 'Moda', hosting: 'Hosting', back: '← Geri', offers: 'teklif', exclusive: 'Özel fırsatlar ve kuponlar', getCoupon: 'Kuponu Al', unlockCoupon: 'Kuponu Açın', subscribe: 'Kodu almak için abone olun', yourCode: 'Sizin kodunuz:', copy: 'Kopyala', copyright: '© 2026 KuponHub', vidiq_desc: 'YouTube analitik araçlarında %50 indirim alın. Kanal performansınızı optimize etmek isteyen içerik oluşturucular için mükemmeldir.', elevenlabs_desc: 'Premium AI metin-konuşma hizmetlerinde %20 indirim. Projeleriniz için doğal ses oluşturun.', hostinger_desc: 'Tüm Hostinger hosting paketlerinde %20 tasarruf yapın. Hızlı, güvenilir hosting ve 24/7 destek dahil.' },
+  ru: { featured: 'Ежедневные предложения и купоны', cashback: 'Получите кэшбэк и дополнительную экономию на ваши любимые бренды', search: 'Поиск магазинов...', all: 'Все', shopping: 'Покупки', travel: 'Путешествия', tech: 'Технология', vpn: 'VPN', fashion: 'Мода', hosting: 'Хостинг', back: '← Назад', offers: 'предложения', exclusive: 'Эксклюзивные предложения и купоны', getCoupon: 'Получить купон', unlockCoupon: 'Разблокировать купон', subscribe: 'Подпишитесь, чтобы получить код', yourCode: 'Ваш код:', copy: 'Копировать', copyright: '© 2026 KuponHub', vidiq_desc: 'Получите 50% скидку на инструменты YouTube Analytics. Идеально для создателей контента, которые хотят оптимизировать производительность своего канала.', elevenlabs_desc: 'Получите 20% скидку на услуги преобразования текста в речь с искусственным интеллектом. Создавайте естественные голоса для своих проектов.', hostinger_desc: 'Сэкономьте 20% на всех пакетах хостинга Hostinger. Быстрый, надежный хостинг с поддержкой 24/7.' },
+  zh: { featured: '每日特惠和优惠券', cashback: '在您最喜欢的品牌上获得现金返还和额外节省', search: '搜索商店...', all: '全部', shopping: '购物', travel: '旅行', tech: '科技', vpn: 'VPN', fashion: '时尚', hosting: '托管', back: '← 返回', offers: '优惠', exclusive: '独家优惠和优惠券', getCoupon: '获取优惠券', unlockCoupon: '解锁优惠券', subscribe: '订阅以获取代码', yourCode: '您的代码:', copy: '复制', copyright: '© 2026 KuponHub', vidiq_desc: '获得YouTube分析工具50%的折扣。非常适合希望优化频道性能的内容创作者。', elevenlabs_desc: '享受高级AI文本转语音服务20%的折扣。为您的项目创建自然发音的声音。', hostinger_desc: '在所有Hostinger托管套餐上节省20%。快速、可靠的托管，包括24/7支持。' },
+  es: { featured: 'Ofertas y cupones diarios destacados', cashback: 'Obtenga reembolso y ahorros adicionales en sus marcas favoritas', search: 'Buscar tiendas...', all: 'Todos', shopping: 'Compras', travel: 'Viajes', tech: 'Tecnología', vpn: 'VPN', fashion: 'Moda', hosting: 'Alojamiento', back: '← Volver', offers: 'ofertas', exclusive: 'Ofertas y cupones exclusivos para', getCoupon: 'Obtener Cupón', unlockCoupon: 'Desbloquear Cupón', subscribe: 'Suscríbete para obtener el código', yourCode: 'Tu código:', copy: 'Copiar', copyright: '© 2026 KuponHub', vidiq_desc: 'Obtenga 50% de descuento en herramientas de análisis de YouTube. Perfecto para creadores de contenido que desean optimizar el rendimiento de su canal.', elevenlabs_desc: 'Disfrute de 20% de descuento en servicios premium de síntesis de voz con IA. Cree voces naturales para sus proyectos.', hostinger_desc: 'Ahorre 20% en todos los paquetes de hosting de Hostinger. Hosting rápido y confiable con soporte 24/7 incluido.' }
 };
 
 const STORES = {
   all: [
-    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: 'Get 50% off YouTube analytics tools. Perfect for content creators looking to optimize their channel performance.', link: 'https://vidiq.com/kuponhub', partner: true}]},
-    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', desc: 'Enjoy 20% discount on premium AI text-to-speech services. Create natural-sounding voices for your projects.', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]},
-    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting Plans', desc: 'Save 20% on all Hostinger hosting packages. Fast, reliable hosting with 24/7 support included.', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', descKey: 'vidiq_desc', link: 'https://vidiq.com/kuponhub', partner: true}]},
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', descKey: 'elevenlabs_desc', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]},
+    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting Plans', descKey: 'hostinger_desc', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
   ],
   shopping: [], travel: [], tech: [
-    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', desc: 'Get 50% off YouTube analytics tools.', link: 'https://vidiq.com/kuponhub', partner: true}]},
-    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', desc: 'Enjoy 20% discount on premium AI text-to-speech.', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]}
+    { id: 1, name: 'VidIQ', emoji: '🎥', coupons: [{id: 1, code: 'VIDIQ50', disc: '50%', title: 'YouTube Analytics Pro', descKey: 'vidiq_desc', link: 'https://vidiq.com/kuponhub', partner: true}]},
+    { id: 2, name: 'ElevenLabs', emoji: '🎙️', coupons: [{id: 2, code: 'EL20', disc: '20%', title: 'AI Voice Generation', descKey: 'elevenlabs_desc', link: 'https://try.elevenlabs.io/ei50op7ldiit', partner: true}]}
   ],
   vpn: [], fashion: [], hosting: [
-    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: [{id: 3, code: 'KUPONHUB20', disc: '20%', title: 'Web Hosting Plans', desc: 'Save 20% on Hostinger hosting.', link: 'https://www.hostinger.com/cart?product=hosting%3Ahostinger_premium&period=12&referral_type=cart_link&REFERRALCODE=EYNNIHATAFIC&referral_id=019d5f46-87b6-713f-985a-bf392b521ffd', partner: true}]}
+    { id: 3, name: 'Hostinger', emoji: '🌐', coupons: []}
   ]
 };
 
@@ -228,7 +236,7 @@ function render() {
           <div class="coupon-middle">
             <h3 class="coupon-title">${c.title}</h3>
             <ul class="coupon-desc" style="list-style: none; padding: 0;">
-              <li>✓ ${c.desc}</li>
+              <li>✓ ${t(c.descKey)}</li>
               <li>✓ Get exclusive code via email</li>
               <li>✓ Valid until latest deals</li>
             </ul>
