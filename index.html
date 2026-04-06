@@ -315,6 +315,13 @@ document.getElementById('emailModal').addEventListener('click', (e) => {
   if (e.target === document.getElementById('emailModal')) document.getElementById('emailModal').classList.remove('active');
 });
 
+// Load Hostinger data
+if (typeof HOSTINGER_COUPONS !== 'undefined' && HOSTINGER_COUPONS.length > 0) {
+  STORES.hosting[0].coupons = HOSTINGER_COUPONS.map(c => ({...c, partner: true}));
+  STORES.all = STORES.all.filter(s => s.name !== 'Hostinger');
+  STORES.all.push({id: 3, name: 'Hostinger', emoji: '🌐', coupons: HOSTINGER_COUPONS.map(c => ({...c, partner: true}))});
+}
+
 document.getElementById('langSelect').value = lang;
 render();
 </script>
