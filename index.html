@@ -206,7 +206,7 @@ function render() {
             <h3 class="coupon-title">${c.title}</h3>
             <ul class="coupon-desc" style="list-style: none; padding: 0;">
               <li>✓ ${c.desc}</li>
-              <li>✓ Use coupon code: <strong>${c.code}</strong></li>
+              <li>✓ Get exclusive code via email</li>
               <li>✓ Valid until latest deals</li>
             </ul>
             <div class="social-share" style="margin-top: 1rem; border-top: 1px solid #e9e6f9; padding-top: 1rem;">
@@ -220,7 +220,7 @@ function render() {
           </div>
           <div class="coupon-right">
             <div class="coupon-logo">${store.emoji}</div>
-            <button class="coupon-btn" onclick="openModal('${c.code}')">Activate Deal</button>
+            <button class="coupon-btn" onclick="openModal('${c.code}')">Get Coupon</button>
           </div>
         </div>
       `;
