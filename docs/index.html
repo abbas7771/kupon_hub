@@ -257,9 +257,10 @@ function render() {
           <div class="coupon-middle">
             <h3 class="coupon-title">${c.title}</h3>
             <ul class="coupon-desc" style="list-style: none; padding: 0;">
+              <li>✓ ${c.price || 'Special offer'}</li>
               <li>✓ ${(() => {
-                const desc = TRANSLATIONS && TRANSLATIONS[lang] ? (TRANSLATIONS[lang][c.descKey] || TRANSLATIONS[lang][c.descKey?.toLowerCase?.()] || TRANSLATIONS['en'][c.descKey]) : null;
-                return desc || 'Get exclusive offer';
+                const descs = {premium20_package: {tr: '✓ 3 sayt ✓ 25.000 ziyarətçi/ay ✓ 20GB SSD ✓ Pulsuz SSL ✓ 20% endirim', en: '✓ 3 websites ✓ 25,000 visitors/month ✓ 20GB SSD ✓ Free SSL ✓ 20% discount'}, business20_package: {tr: '✓ 50 sayt ✓ 100.000 ziyarətçi/ay ✓ 50GB NVMe ✓ Email hesapları ✓ 20% endirim', en: '✓ 50 websites ✓ 100,000 visitors/month ✓ 50GB NVMe ✓ Email accounts ✓ 20% discount'}, cloud20_package: {tr: '✓ 100 sayt ✓ 200.000 ziyarətçi/ay ✓ 100GB NVMe ✓ 4GB RAM ✓ 20% endirim', en: '✓ 100 websites ✓ 200,000 visitors/month ✓ 100GB NVMe ✓ 4GB RAM ✓ 20% discount'}};
+                return (descs[c.descKey] && descs[c.descKey][lang]) ? descs[c.descKey][lang] : 'Get exclusive deal';
               })()}</li>
               <li>✓ Get exclusive code via email</li>
               <li>✓ Valid until latest deals</li>
