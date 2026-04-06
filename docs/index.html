@@ -231,6 +231,8 @@ function updateUI() {
   document.getElementById('footer').textContent = t('copyright');
   document.getElementById('backBtn').textContent = t('back');
   document.getElementById('backBtn2').textContent = t('back');
+  const catNames = {all: 'All', shopping: 'Shopping', travel: 'Travel', tech: 'Tech', vpn: 'VPN', fashion: 'Fashion', hosting: 'Hosting'};
+  document.getElementById('viewTitle').textContent = catNames[cat] || cat;
 }
 
 function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); updateUI(); render(); }
@@ -245,6 +247,7 @@ function render() {
   const grid = document.getElementById('storeGrid');
   
   updateUI();
+  console.log('Rendering category:', cat, 'Stores:', STORES[cat]);
 
   if (store) {
     main.style.display = 'none';
