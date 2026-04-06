@@ -175,8 +175,19 @@ const STORES = {
 
 let lang = 'en', cat = 'all', store = null, coupon = null;
 
-function changeLanguage(l) { lang = l; localStorage.setItem('lang', l); }
-function filterCategory(c) { cat = c; store = null; document.querySelectorAll('.cat-item').forEach(e => e.classList.remove('active')); event.target.classList.add('active'); render(); }
+function changeLanguage(l) { 
+  lang = l; 
+  localStorage.setItem('lang', l);
+  console.log('Language changed to:', lang);
+}
+
+function filterCategory(c) { 
+  cat = c; 
+  store = null; 
+  document.querySelectorAll('.cat-item').forEach(e => e.classList.remove('active')); 
+  event.target.classList.add('active'); 
+  render(); 
+}
 function backToHome() { store = null; cat = 'all'; render(); }
 function backToCategories() { store = null; render(); }
 function doSearch() {}
